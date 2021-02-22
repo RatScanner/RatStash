@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class GearMod
-    {
-    }
+	public class GearMod : WeaponMod
+	{
+	}
 }

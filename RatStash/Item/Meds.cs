@@ -4,22 +4,22 @@ namespace RatStash
 {
 	using Newtonsoft.Json;
 
-	public class Meds
-    {
-        [JsonProperty("MaxHpResource")]
-        public int MaxHpResource { get; set; }
+	public class Meds : Item
+	{
+		[JsonProperty("MaxHpResource")]
+		public int MaxHpResource { get; set; }
 
-        [JsonProperty("StimulatorBuffs")]
-        public string StimulatorBuffs { get; set; }
+		[JsonProperty("StimulatorBuffs")]
+		public string StimulatorBuffs { get; set; }
 
-        [JsonProperty("hpResourceRate")]
-        public int HpResourceRate { get; set; }
+		[JsonProperty("hpResourceRate")]
+		public int HpResourceRate { get; set; }
 
-        [JsonProperty("medEffectType")]
+		[JsonProperty("medEffectType")]
 		[JsonConverter(typeof(StringEnumConverter))]
-        public EffectType MedEffectType { get; set; }
+		public EffectType MedEffectType { get; set; }
 
-        [JsonProperty("medUseTime")]
-        public float MedUseTime { get; set; }
-    }
+		[JsonProperty("medUseTime")]
+		public float MedUseTime { get; set; }
+	}
 }

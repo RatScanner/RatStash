@@ -23,7 +23,6 @@ namespace RatStash
 	{
 		private static readonly Dictionary<TaxonomyColor, Color> _colorDict = new Dictionary<TaxonomyColor, Color>()
 		{
-
 			{
 				TaxonomyColor.Default,
 				Color.FromArgb(127, 127, 127)

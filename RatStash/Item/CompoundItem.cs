@@ -2,7 +2,7 @@ namespace RatStash
 {
 	using Newtonsoft.Json;
 
-	public class CompoundItem
+	public class CompoundItem : Item
 	{
 		[JsonProperty("CanPutIntoDuringTheRaid")]
 		public bool CanPutIntoDuringTheRaid { get; set; }

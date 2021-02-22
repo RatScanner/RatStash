@@ -4,19 +4,19 @@ namespace RatStash
 {
 	using Newtonsoft.Json;
 
-	public class FoodAndDrink
-    {
-        [JsonProperty("MaxResource")]
-        public int MaxResource { get; set; }
+	public class FoodAndDrink : Item
+	{
+		[JsonProperty("MaxResource")]
+		public int MaxResource { get; set; }
 
-        [JsonProperty("StimulatorBuffs")]
-        public string StimulatorBuffs { get; set; }
+		[JsonProperty("StimulatorBuffs")]
+		public string StimulatorBuffs { get; set; }
 
-        [JsonProperty("foodEffectType")]
+		[JsonProperty("foodEffectType")]
 		[JsonConverter(typeof(StringEnumConverter))]
-        public EffectType FoodEffectType { get; set; }
+		public EffectType FoodEffectType { get; set; }
 
-        [JsonProperty("foodUseTime")]
-        public int FoodUseTime { get; set; }
-    }
+		[JsonProperty("foodUseTime")]
+		public int FoodUseTime { get; set; }
+	}
 }

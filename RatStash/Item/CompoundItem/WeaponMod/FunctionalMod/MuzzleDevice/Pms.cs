@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class Pms
-    {
-    }
+	public class Pms : MuzzleDevice
+	{
+	}
 }

@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class Info
-    {
-    }
+	public class Info : Item
+	{
+	}
 }

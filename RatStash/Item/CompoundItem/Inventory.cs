@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class Inventory
-    {
-    }
+	public class Inventory : CompoundItem
+	{
+	}
 }

@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class Jewelry
-    {
-    }
+	public class Jewelry : BarterItem
+	{
+	}
 }

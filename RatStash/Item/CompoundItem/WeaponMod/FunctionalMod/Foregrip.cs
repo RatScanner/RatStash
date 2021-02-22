@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class Foregrip
-    {
-    }
+	public class Foregrip : FunctionalMod
+	{
+	}
 }

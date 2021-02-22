@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class HouseholdGoods
-    {
-    }
+	public class HouseholdGoods : BarterItem
+	{
+	}
 }

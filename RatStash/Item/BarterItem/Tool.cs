@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class Tool
-    {
-    }
+	public class Tool : BarterItem
+	{
+	}
 }

@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class Facecover
-    {
-    }
+	public class FaceCover : ArmoredEquipment
+	{
+	}
 }

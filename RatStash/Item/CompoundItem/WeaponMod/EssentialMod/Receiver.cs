@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class Receiver
-    {
-    }
+	public class Receiver : EssentialMod
+	{
+	}
 }

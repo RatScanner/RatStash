@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class Auxiliarymod
-    {
-    }
+	public class AuxiliaryMod : FunctionalMod
+	{
+	}
 }

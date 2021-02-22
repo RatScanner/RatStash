@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class Bipod
-    {
-    }
+	public class Bipod : FunctionalMod
+	{
+	}
 }

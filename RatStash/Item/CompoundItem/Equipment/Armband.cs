@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class Armband
-    {
-    }
+	public class ArmBand : Equipment
+	{
+	}
 }

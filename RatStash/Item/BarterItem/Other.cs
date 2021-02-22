@@ -2,9 +2,9 @@ namespace RatStash
 {
 	using Newtonsoft.Json;
 
-	public class Other
-    {
-        [JsonProperty("DogTagQualities")]
-        public bool DogTagQualities { get; set; }
-    }
+	public class Other : BarterItem
+	{
+		[JsonProperty("DogTagQualities")]
+		public bool DogTagQualities { get; set; }
+	}
 }

@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class Flashhider
-    {
-    }
+	public class Flashhider : MuzzleDevice
+	{
+	}
 }

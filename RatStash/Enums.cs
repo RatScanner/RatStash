@@ -1,34 +1,147 @@
-﻿namespace RatStash
+﻿using System.Runtime.Serialization;
+
+namespace RatStash
 {
-	public enum Location { Bigmap, Interchange, Laboratory, RezervBase, Shoreline, Woods }
+	public enum Location
+	{
+		Bigmap,
+		Interchange,
+		Laboratory,
+		RezervBase,
+		Shoreline,
+		Woods
+	}
 
-	public enum AmmoType { Buckshot, Bullet, Grenade, PropelledGrenade }
+	public enum AmmoType
+	{
+		Buckshot,
+		Bullet,
+		Grenade,
+		PropelledGrenade
+	}
 
-	public enum ArmorMaterial { Aluminium, Aramid, ArmoredSteel, Ceramic, Combined, Glass, Titan, UHMWPE }
+	public enum ArmorMaterial
+	{
+		Aluminium,
+		Aramid,
+		ArmoredSteel,
+		Ceramic,
+		Combined,
+		Glass,
+		Titan,
+		UHMWPE
+	}
 
-	public enum ArmorZone { Chest, Head, LeftArm, LeftLeg, RightArm, RightLeg, Stomach }
+	public enum ArmorZone
+	{
+		Chest,
+		Head,
+		LeftArm,
+		LeftLeg,
+		RightArm,
+		RightLeg,
+		Stomach
+	}
 
-	public enum DeafStrength { High, Low, None }
+	public enum DeafStrength
+	{
+		High,
+		Low,
+		None
+	}
 
-	public enum ExplosionType { BigRoundImpact, BigRoundImpactExplosive, Empty, SmallgrenadeExpl }
+	public enum ExplosionType
+	{
+		BigRoundImpact,
+		BigRoundImpactExplosive,
+		Empty,
+		SmallgrenadeExpl
+	}
 
-	public enum FaceShieldMask { Narrow, NoMask, Wide }
+	public enum FaceShieldMask
+	{
+		Narrow,
+		NoMask,
+		Wide
+	}
 
-	public enum EffectType { AfterUse, DuringUse }
+	public enum EffectType
+	{
+		AfterUse,
+		DuringUse
+	}
 
-	public enum HeadSegment { Ears, Eyes, Jaws, Nape, Top }
+	public enum HeadSegment
+	{
+		Ears,
+		Eyes,
+		Jaws,
+		Nape,
+		Top
+	}
 
-	public enum MaterialType { BodyArmor, GlassVisor, Helmet }
+	public enum MaterialType
+	{
+		BodyArmor,
+		GlassVisor,
+		Helmet
+	}
 
-	public enum MuzzleModType { Brake, Conpensator, MuzzleCombo, Pms, Silencer }
+	public enum MuzzleModType
+	{
+		Brake,
+		Conpensator,
+		MuzzleCombo,
+		Pms,
+		Silencer
+	}
 
-	public enum Rarity { Common, NotExist, Rare, Superrare }
+	public enum Rarity
+	{
+		Common,
+		[EnumMember(Value = "Not_exist")] NotExist,
+		Rare,
+		Superrare
+	}
 
-	public enum ReloadMode { ExternalMagazine, InternalMagazine, OnlyBarrel }
+	public enum ReloadMode
+	{
+		ExternalMagazine,
+		InternalMagazine,
+		OnlyBarrel
+	}
 
-	public enum SightModType { Hybrid, Iron, Optic, Reflex }
+	public enum SightModType
+	{
+		Hybrid,
+		Iron,
+		Optic,
+		Reflex
+	}
 
-	public enum FactionSide { Bear, Savage, Usec }
+	public enum Mask
+	{
+		Thermal,
+		Anvis,
+		Binocular,
+		GasMask,
+		OldMonocular
+	}
+
+	public enum SelectablePalette
+	{
+		Fusion,
+		Rainbow,
+		WhiteHot,
+		BlackHot
+	}
+
+	public enum FactionSide
+	{
+		Bear,
+		Savage,
+		Usec
+	}
 
 	public enum EquipmentSlot
 	{
@@ -58,5 +171,9 @@
 		Burst = 3
 	}
 
-	public enum UseType { Primary, Secondary }
+	public enum UseType
+	{
+		Primary,
+		Secondary
+	}
 }

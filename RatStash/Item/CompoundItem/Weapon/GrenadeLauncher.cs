@@ -1,6 +1,6 @@
 namespace RatStash
 {
-	public class GrenadeLauncher
-    {
-    }
+	public class GrenadeLauncher : Weapon
+	{
+	}
 }

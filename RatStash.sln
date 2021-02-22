@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RatStash", "RatStash\RatStash.csproj", "{C3EA2FAB-26D5-497B-8D41-A21AABB6FCA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RatStashTest", "RatStashTest\RatStashTest.csproj", "{2C16D042-C36F-48C3-BA6C-CB8ECEC3F050}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RatStashTest", "RatStashTest\RatStashTest.csproj", "{2C16D042-C36F-48C3-BA6C-CB8ECEC3F050}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F527BB67-2D3F-4A1B-B264-E7E1A5E2505F}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

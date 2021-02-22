@@ -1,0 +1,40 @@
+using Newtonsoft.Json.Converters;
+
+namespace RatStash
+{
+	using Newtonsoft.Json;
+
+	public class Magazine : GearMod
+	{
+		[JsonProperty("CanAdmin")]
+		public bool CanAdmin { get; set; }
+
+		[JsonProperty("CanFast")]
+		public bool CanFast { get; set; }
+
+		[JsonProperty("CanHit")]
+		public bool CanHit { get; set; }
+
+		[JsonProperty("Cartridges")]
+		public Slot[] Cartridges { get; set; }
+
+		[JsonProperty("CheckOverride")]
+		public long CheckOverride { get; set; }
+
+		[JsonProperty("CheckTimeModifier")]
+		public long CheckTimeModifier { get; set; }
+
+		[JsonProperty("LoadUnloadModifier")]
+		public long LoadUnloadModifier { get; set; }
+
+		[JsonProperty("ReloadMagType")]
+		[JsonConverter(typeof(StringEnumConverter))]
+		public ReloadMode ReloadMagType { get; set; }
+
+		[JsonProperty("VisibleAmmoRangesString")]
+		public string VisibleAmmoRangesString { get; set; }
+
+		[JsonProperty("magAnimationIndex")]
+		public long MagAnimationIndex { get; set; }
+	}
+}
