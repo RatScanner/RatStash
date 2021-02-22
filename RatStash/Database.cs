@@ -161,5 +161,10 @@ namespace RatStash
 			_items.TryGetValue(id, out var value);
 			return value;
 		}
+
+		public static bool IsNode(string id)
+		{
+			return _nodes.ContainsKey(id);
+		}
 	}
 }

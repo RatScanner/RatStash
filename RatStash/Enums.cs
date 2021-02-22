@@ -52,10 +52,14 @@ namespace RatStash
 
 	public enum ExplosionType
 	{
-		BigRoundImpact,
-		BigRoundImpactExplosive,
+		[EnumMember(Value = "")]
 		Empty,
-		SmallgrenadeExpl
+		[EnumMember(Value = "big_round_impact")]
+		BigRoundImpact,
+		[EnumMember(Value = "big_round_impact_explosive")]
+		BigRoundImpactExplosive,
+		[EnumMember(Value = "smallgrenade_expl")]
+		SmallGrenadeExplosive
 	}
 
 	public enum FaceShieldMask
@@ -175,5 +179,12 @@ namespace RatStash
 	{
 		Primary,
 		Secondary
+	}
+
+	public enum Currency
+	{
+		RUB,
+		EUR,
+		USD
 	}
 }

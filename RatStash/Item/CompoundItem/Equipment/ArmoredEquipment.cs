@@ -1,3 +1,5 @@
+using Newtonsoft.Json.Converters;
+
 namespace RatStash
 {
 	using Newtonsoft.Json;
@@ -5,7 +7,7 @@ namespace RatStash
 	public class ArmoredEquipment : Equipment
 	{
 		[JsonProperty("ArmorMaterial")]
-		public string ArmorMaterial { get; set; }
+		public ArmorMaterial ArmorMaterial { get; set; }
 
 		[JsonProperty("BlindnessProtection")]
 		public int BlindnessProtection { get; set; }
@@ -14,7 +16,7 @@ namespace RatStash
 		public int BluntThroughput { get; set; }
 
 		[JsonProperty("DeafStrength")]
-		public string DeafStrength { get; set; }
+		public DeafStrength DeafStrength { get; set; }
 
 		[JsonProperty("Durability")]
 		public int Durability { get; set; }
@@ -23,16 +25,16 @@ namespace RatStash
 		public bool FaceShieldComponent { get; set; }
 
 		[JsonProperty("FaceShieldMask")]
-		public string FaceShieldMask { get; set; }
+		public FaceShieldMask FaceShieldMask { get; set; }
 
 		[JsonProperty("HasHinge")]
 		public bool HasHinge { get; set; }
 
 		[JsonProperty("Indestructibility")]
-		public decimal Indestructibility { get; set; }
+		public float Indestructibility { get; set; }
 
 		[JsonProperty("MaterialType")]
-		public string MaterialType { get; set; }
+		public MaterialType MaterialType { get; set; }
 
 		[JsonProperty("MaxDurability")]
 		public int MaxDurability { get; set; }
@@ -43,11 +45,11 @@ namespace RatStash
 		[JsonProperty("armorClass")]
 		public int ArmorClass { get; set; }
 
-		[JsonProperty("armorZone")]
-		public object[] ArmorZone { get; set; }
+		[JsonProperty("armorZone", ItemConverterType = typeof(StringEnumConverter))]
+		public ArmorZone[] ArmorZone { get; set; }
 
-		[JsonProperty("headSegments")]
-		public object[] HeadSegments { get; set; }
+		[JsonProperty("headSegments", ItemConverterType = typeof(StringEnumConverter))]
+		public HeadSegment[] HeadSegments { get; set; }
 
 		[JsonProperty("mousePenalty")]
 		public int MousePenalty { get; set; }

@@ -26,12 +26,12 @@ namespace RatStash
 		public int CutoffFreq { get; set; }
 
 		[JsonProperty("Distortion")]
-		public decimal Distortion { get; set; }
+		public float Distortion { get; set; }
 
 		[JsonProperty("DryVolume")]
 		public int DryVolume { get; set; }
 
 		[JsonProperty("Resonance")]
-		public decimal Resonance { get; set; }
+		public float Resonance { get; set; }
 	}
 }

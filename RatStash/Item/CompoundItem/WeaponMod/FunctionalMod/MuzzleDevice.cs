@@ -1,3 +1,5 @@
+using Newtonsoft.Json.Converters;
+
 namespace RatStash
 {
 	using Newtonsoft.Json;
@@ -5,6 +7,7 @@ namespace RatStash
 	public class MuzzleDevice : FunctionalMod
 	{
 		[JsonProperty("muzzleModType")]
-		public string MuzzleModType { get; set; }
+		[JsonConverter(typeof(StringEnumConverter))]
+		public MuzzleModType MuzzleModType { get; set; }
 	}
 }

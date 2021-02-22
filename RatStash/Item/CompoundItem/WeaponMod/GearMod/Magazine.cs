@@ -19,13 +19,13 @@ namespace RatStash
 		public Slot[] Cartridges { get; set; }
 
 		[JsonProperty("CheckOverride")]
-		public long CheckOverride { get; set; }
+		public int CheckOverride { get; set; }
 
 		[JsonProperty("CheckTimeModifier")]
-		public long CheckTimeModifier { get; set; }
+		public int CheckTimeModifier { get; set; }
 
 		[JsonProperty("LoadUnloadModifier")]
-		public long LoadUnloadModifier { get; set; }
+		public int LoadUnloadModifier { get; set; }
 
 		[JsonProperty("ReloadMagType")]
 		[JsonConverter(typeof(StringEnumConverter))]
@@ -35,6 +35,6 @@ namespace RatStash
 		public string VisibleAmmoRangesString { get; set; }
 
 		[JsonProperty("magAnimationIndex")]
-		public long MagAnimationIndex { get; set; }
+		public int MagAnimationIndex { get; set; }
 	}
 }

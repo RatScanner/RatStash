@@ -5,7 +5,7 @@ namespace RatStash
 	public class Barrel : EssentialMod
 	{
 		[JsonProperty("CenterOfImpact")]
-		public decimal CenterOfImpact { get; set; }
+		public float CenterOfImpact { get; set; }
 
 		[JsonProperty("IsSilencer")]
 		public bool IsSilencer { get; set; }

@@ -1,3 +1,5 @@
+using Newtonsoft.Json.Converters;
+
 namespace RatStash
 {
 	using Newtonsoft.Json;
@@ -29,7 +31,8 @@ namespace RatStash
 		public int SizeWidth { get; set; }
 
 		[JsonProperty("spawnRarity")]
-		public string SpawnRarity { get; set; }
+		[JsonConverter(typeof(StringEnumConverter))]
+		public Rarity SpawnRarity { get; set; }
 
 		[JsonProperty("spawnTypes")]
 		public string SpawnTypes { get; set; }

@@ -1,3 +1,5 @@
+using Newtonsoft.Json.Converters;
+
 namespace RatStash
 {
 	using Newtonsoft.Json;
@@ -5,7 +7,8 @@ namespace RatStash
 	public class ChestRig : SearchableItem
 	{
 		[JsonProperty("ArmorMaterial")]
-		public string ArmorMaterial { get; set; }
+		[JsonConverter(typeof(StringEnumConverter))]
+		public ArmorMaterial ArmorMaterial { get; set; }
 
 		[JsonProperty("BluntThroughput")]
 		public int BluntThroughput { get; set; }
@@ -22,8 +25,8 @@ namespace RatStash
 		[JsonProperty("armorClass")]
 		public int ArmorClass { get; set; }
 
-		[JsonProperty("armorZone")]
-		public object[] ArmorZone { get; set; }
+		[JsonProperty("armorZone", ItemConverterType = typeof(StringEnumConverter))]
+		public ArmorZone[] ArmorZone { get; set; }
 
 		[JsonProperty("mousePenalty")]
 		public int MousePenalty { get; set; }

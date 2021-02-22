@@ -1,3 +1,5 @@
+using Newtonsoft.Json.Converters;
+
 namespace RatStash
 {
 	using Newtonsoft.Json;
@@ -95,7 +97,8 @@ namespace RatStash
 		public int RecolDispersion { get; set; }
 
 		[JsonProperty("ReloadMode")]
-		public string ReloadMode { get; set; }
+		[JsonConverter(typeof(StringEnumConverter))]
+		public ReloadMode ReloadMode { get; set; }
 
 		[JsonProperty("RepairComplexity")]
 		public int RepairComplexity { get; set; }
@@ -116,7 +119,7 @@ namespace RatStash
 		public int SizeReduceRight { get; set; }
 
 		[JsonProperty("TacticalReloadFixation")]
-		public decimal TacticalReloadFixation { get; set; }
+		public float TacticalReloadFixation { get; set; }
 
 		[JsonProperty("TacticalReloadStiffnes")]
 		public Vector3 TacticalReloadStiffnes { get; set; }
@@ -128,13 +131,13 @@ namespace RatStash
 		public string AmmoCaliber { get; set; }
 
 		[JsonProperty("bEffDist")]
-		public int BEffDist { get; set; }
+		public int BEffectiveDistance { get; set; }
 
 		[JsonProperty("bFirerate")]
 		public int BFirerate { get; set; }
 
 		[JsonProperty("bHearDist")]
-		public int BHearDist { get; set; }
+		public int BHearDistance { get; set; }
 
 		[JsonProperty("chamberAmmoCount")]
 		public int ChamberAmmoCount { get; set; }
@@ -146,10 +149,10 @@ namespace RatStash
 		public string DefMagType { get; set; }
 
 		[JsonProperty("durabSpawnMax")]
-		public int DurabSpawnMax { get; set; }
+		public int DurabilitySpawnMax { get; set; }
 
 		[JsonProperty("durabSpawnMin")]
-		public int DurabSpawnMin { get; set; }
+		public int DurabilitySpawnMin { get; set; }
 
 		[JsonProperty("isBoltCatch")]
 		public bool IsBoltCatch { get; set; }
@@ -164,12 +167,13 @@ namespace RatStash
 		public int ShotgunDispersion { get; set; }
 
 		[JsonProperty("weapClass")]
-		public string WeapClass { get; set; }
+		public string WeaponClass { get; set; }
 
-		[JsonProperty("weapFireType")]
-		public object[] WeapFireType { get; set; }
+		[JsonProperty("weapFireType", ItemConverterType = typeof(StringEnumConverter))]
+		public FireMode[] WeaponFireType { get; set; }
 
 		[JsonProperty("weapUseType")]
-		public string WeapUseType { get; set; }
+		[JsonConverter(typeof(StringEnumConverter))]
+		public UseType WeaponUseType { get; set; }
 	}
 }

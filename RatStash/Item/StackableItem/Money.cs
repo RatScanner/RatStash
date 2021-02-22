@@ -1,3 +1,5 @@
+using Newtonsoft.Json.Converters;
+
 namespace RatStash
 {
 	using Newtonsoft.Json;
@@ -5,15 +7,16 @@ namespace RatStash
 	public class Money : StackableItem
 	{
 		[JsonProperty("eqMax")]
-		public long EqMax { get; set; }
+		public int EqMax { get; set; }
 
 		[JsonProperty("eqMin")]
-		public long EqMin { get; set; }
+		public int EqMin { get; set; }
 
 		[JsonProperty("rate")]
-		public long Rate { get; set; }
+		public int Rate { get; set; }
 
 		[JsonProperty("type")]
-		public string Type { get; set; }
+		[JsonConverter(typeof(StringEnumConverter))]
+		public Currency Type { get; set; }
 	}
 }
