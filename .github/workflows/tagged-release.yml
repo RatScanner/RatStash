@@ -21,12 +21,13 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '3.1.x'
-      - name: Install dependencies
-        run: dotnet restore
+      - name: Test
+        run: dotnet test
       - name: Publish to NuGet
-        uses: brandedoutcast/publish-nuget@v2.5.5
+        uses: brandedoutcast/publish-nuget@v2
         with:
           PROJECT_FILE_PATH: RatStash/RatStash.csproj
-          TAG_COMMIT: false
+          TAG_COMMIT: true
+          TAG_FORMAT: v*
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           INCLUDE_SYMBOLS: true
