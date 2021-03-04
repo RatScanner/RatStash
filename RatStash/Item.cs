@@ -1,11 +1,13 @@
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace RatStash
 {
-	using Newtonsoft.Json;
-
 	public class Item
 	{
+		public string Id { get; set; }
+
 		[JsonProperty("Name")]
 		public string Name { get; set; }
 
@@ -114,7 +116,7 @@ namespace RatStash
 		public bool CanRequireOnRagfair { get; set; }
 
 		[JsonProperty("ConflictingItems")]
-		public string[] ConflictingItems { get; set; }
+		public List<string> ConflictingItems { get; set; } = new List<string>();
 
 		[JsonProperty("FixedPrice")]
 		public bool FixedPrice { get; set; }
@@ -127,13 +129,13 @@ namespace RatStash
 		public EquipmentSlot UnlootableFromSlot { get; set; }
 
 		[JsonProperty("UnlootableFromSide", ItemConverterType = typeof(StringEnumConverter))]
-		public FactionSide[] UnlootableFromSide { get; set; }
+		public List<FactionSide> UnlootableFromSide { get; set; }
 
 		[JsonProperty("ChangePriceCoef")]
 		public float ChangePriceCoefficient { get; set; }
 
 		[JsonProperty("AllowSpawnOnLocations", ItemConverterType = typeof(StringEnumConverter))]
-		public Location[] AllowSpawnOnLocations { get; set; }
+		public List<Location> AllowSpawnOnLocations { get; set; }
 
 		[JsonProperty("SendToClient")]
 		public bool SendToClient { get; set; }

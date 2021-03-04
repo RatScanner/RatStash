@@ -43,9 +43,6 @@ namespace RatStash
 		[JsonProperty("ThrowType")]
 		public string ThrowType { get; set; }
 
-		[JsonProperty("explDelay")]
-		public int ThrowableWeaponExplDelay { get; set; }
-
 		[JsonProperty("throwDamMax")]
 		public int ThrowDamMax { get; set; }
 	}

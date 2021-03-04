@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace RatStash
 {
 	using Newtonsoft.Json;
@@ -8,12 +10,12 @@ namespace RatStash
 		public bool CanPutIntoDuringTheRaid { get; set; }
 
 		[JsonProperty("CantRemoveFromSlotsDuringRaid")]
-		public EquipmentSlot[] CantRemoveFromSlotsDuringRaid { get; set; }
+		public List<EquipmentSlot> CantRemoveFromSlotsDuringRaid { get; set; } = new List<EquipmentSlot>();
 
 		[JsonProperty("Grids")]
-		public Grid[] Grids { get; set; }
+		public List<Grid> Grids { get; set; } = new List<Grid>();
 
 		[JsonProperty("Slots")]
-		public Slot[] Slots { get; set; }
+		public List<Slot> Slots { get; set; } = new List<Slot>();
 	}
 }

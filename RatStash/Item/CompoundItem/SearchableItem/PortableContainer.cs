@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json.Converters;
 
 namespace RatStash
@@ -7,13 +8,13 @@ namespace RatStash
 	public class PortableContainer : SearchableItem
 	{
 		[JsonProperty("containType")]
-		public object[] ContainType { get; set; }
+		public List<object> ContainType { get; set; } = new List<object>();
 
 		[JsonProperty("isSecured")]
 		public bool IsSecured { get; set; }
 
 		[JsonProperty("lootFilter")]
-		public object[] LootFilter { get; set; }
+		public List<object> LootFilter { get; set; } = new List<object>();
 
 		[JsonProperty("maxCountSpawn")]
 		public int MaxCountSpawn { get; set; }
@@ -22,7 +23,7 @@ namespace RatStash
 		public int MinCountSpawn { get; set; }
 
 		[JsonProperty("openedByKeyID")]
-		public object[] OpenedByKeyId { get; set; }
+		public List<object> OpenedByKeyId { get; set; } = new List<object>();
 
 		[JsonProperty("sizeHeight")]
 		public int SizeHeight { get; set; }

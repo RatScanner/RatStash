@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json.Converters;
 
 namespace RatStash
@@ -22,7 +23,7 @@ namespace RatStash
 		public float CenterOfImpact { get; set; }
 
 		[JsonProperty("Chambers")]
-		public Slot[] Chambers { get; set; }
+		public List<Slot> Chambers { get; set; } = new List<Slot>();
 
 		[JsonProperty("CompactHandling")]
 		public bool CompactHandling { get; set; }
@@ -170,7 +171,7 @@ namespace RatStash
 		public string WeaponClass { get; set; }
 
 		[JsonProperty("weapFireType", ItemConverterType = typeof(StringEnumConverter))]
-		public FireMode[] WeaponFireType { get; set; }
+		public List<FireMode> WeaponFireType { get; set; } = new List<FireMode>();
 
 		[JsonProperty("weapUseType")]
 		[JsonConverter(typeof(StringEnumConverter))]

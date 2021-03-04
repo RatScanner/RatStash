@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace RatStash
 {
 	using Newtonsoft.Json;
@@ -5,7 +7,7 @@ namespace RatStash
 	public class LockingContainer : CompoundItem
 	{
 		[JsonProperty("KeyIds")]
-		public string[] KeyIds { get; set; }
+		public List<string> KeyIds { get; set; } = new List<string>();
 
 		[JsonProperty("TagColor")]
 		public int TagColor { get; set; }

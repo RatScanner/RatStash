@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json.Converters;
 
 namespace RatStash
@@ -7,16 +8,16 @@ namespace RatStash
 	public class Sights : FunctionalMod
 	{
 		[JsonProperty("AimSensitivity")]
-		public float[][] AimSensitivity { get; set; }
+		public List<List<float>> AimSensitivity { get; set; } = new List<List<float>>();
 
 		[JsonProperty("CalibrationDistances")]
-		public int[][] CalibrationDistances { get; set; }
+		public List<List<int>> CalibrationDistances { get; set; } = new List<List<int>>();
 
 		[JsonProperty("ModesCount")]
-		public int[] ModesCount { get; set; }
+		public List<int> ModesCount { get; set; } = new List<int>();
 
 		[JsonProperty("OpticCalibrationDistances")]
-		public int[] OpticCalibrationDistances { get; set; }
+		public List<int> OpticCalibrationDistances { get; set; } = new List<int>();
 
 		[JsonProperty("ScopesCount")]
 		public int ScopesCount { get; set; }
@@ -28,7 +29,7 @@ namespace RatStash
 		public int SightingRange { get; set; }
 
 		[JsonProperty("Zooms")]
-		public int[][] Zooms { get; set; }
+		public List<List<int>> Zooms { get; set; } = new List<List<int>>();
 
 		[JsonProperty("aimingSensitivity")]
 		public float AimingSensitivity { get; set; }

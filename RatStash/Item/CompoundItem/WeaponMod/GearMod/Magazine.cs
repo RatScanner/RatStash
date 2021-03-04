@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json.Converters;
 
 namespace RatStash
@@ -16,7 +17,7 @@ namespace RatStash
 		public bool CanHit { get; set; }
 
 		[JsonProperty("Cartridges")]
-		public Slot[] Cartridges { get; set; }
+		public List<Slot> Cartridges { get; set; } = new List<Slot>();
 
 		[JsonProperty("CheckOverride")]
 		public int CheckOverride { get; set; }

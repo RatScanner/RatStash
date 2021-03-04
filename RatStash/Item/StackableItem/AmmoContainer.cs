@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace RatStash
 {
 	using Newtonsoft.Json;
@@ -5,7 +7,7 @@ namespace RatStash
 	public class AmmoContainer : StackableItem
 	{
 		[JsonProperty("StackSlots")]
-		public object[] StackSlots { get; set; }
+		public List<object> StackSlots { get; set; } = new List<object>();
 
 		[JsonProperty("ammoCaliber")]
 		public string AmmoCaliber { get; set; }

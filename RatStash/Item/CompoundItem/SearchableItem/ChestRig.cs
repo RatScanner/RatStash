@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json.Converters;
 
 namespace RatStash
@@ -26,7 +27,7 @@ namespace RatStash
 		public int ArmorClass { get; set; }
 
 		[JsonProperty("armorZone", ItemConverterType = typeof(StringEnumConverter))]
-		public ArmorZone[] ArmorZone { get; set; }
+		public List<ArmorZone> ArmorZone { get; set; } = new List<ArmorZone>();
 
 		[JsonProperty("mousePenalty")]
 		public int MousePenalty { get; set; }

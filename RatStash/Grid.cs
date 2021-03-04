@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace RatStash
 {
@@ -20,6 +21,6 @@ namespace RatStash
 		public int MaxWeight { get; set; }
 
 		[JsonProperty("filters")]
-		public ItemFilter[] Filters { get; set; }
+		public List<ItemFilter> Filters { get; set; } = new List<ItemFilter>();
 	}
 }

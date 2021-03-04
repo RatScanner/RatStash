@@ -1,22 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Force.DeepCloner;
 using Newtonsoft.Json.Linq;
 
 namespace RatStash
 {
 	public class Database
 	{
-		private static Dictionary<string, Item> _items = new Dictionary<string, Item>();
-		private static Dictionary<string, Type> _nodes = new Dictionary<string, Type>();
+		private readonly Dictionary<string, Item> _items = new Dictionary<string, Item>();
+		private readonly Dictionary<string, Type> _nodes = new Dictionary<string, Type>();
+
+		/// <summary>
+		/// Create a new database object
+		/// </summary>
+		/// <param name="filepath">Path to the file, containing the item data</param>
+		public Database(string filepath)
+		{
+			Load(filepath);
+		}
 
 		/// <summary>
 		/// Load the item data from a file
 		/// </summary>
-		/// <param name="filepath">Path to the json file</param>
-		public static void Load(string filepath)
+		/// <param name="filepath">Path to the file, containing the item data</param>
+		private void Load(string filepath)
 		{
-			var json = File.ReadAllText(filepath);
+			string json;
+			{
+				using var fileStream = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+				using var textReader = new StreamReader(fileStream);
+				json = textReader.ReadToEnd();
+			}
+
 			var jObj = JObject.Parse(json);
 			var items = jObj.Children();
 
@@ -26,7 +43,7 @@ namespace RatStash
 				var itemInfo = item.First;
 				if ((string)itemInfo["_type"] == "Node")
 				{
-					_nodes.Add((string)itemInfo["_id"], NameToItemType((string)itemInfo["_props"]["Name"]));
+					_nodes.Add((string)itemInfo["_id"], NameToItemType((string)itemInfo["_name"]));
 				}
 			}
 
@@ -37,12 +54,18 @@ namespace RatStash
 				if ((string)itemInfo["_type"] == "Item")
 				{
 					var parent = ResolveParentType((string)itemInfo["_parent"]);
-					_items.Add((string)itemInfo["_id"], (Item)itemInfo["_props"].ToObject(parent));
+					var id = (string)itemInfo["_id"];
+					var parsedItem = (Item)itemInfo["_props"].ToObject(parent);
+					if (parsedItem != null)
+					{
+						parsedItem.Id = id;
+						_items.Add(id, parsedItem);
+					}
 				}
 			}
 		}
 
-		private static Type NameToItemType(string name)
+		private Type NameToItemType(string name)
 		{
 			return name switch
 			{
@@ -151,20 +174,62 @@ namespace RatStash
 			};
 		}
 
-		private static Type ResolveParentType(string id)
+		internal Type ResolveParentType(string id)
 		{
 			return _nodes[id];
 		}
 
-		public static Item FindById(string id)
+		/// <summary>
+		/// Get a item by its id
+		/// </summary>
+		/// <param name="id">The 24 character id of the item</param>
+		/// <returns>Item from the database</returns>
+		/// <remarks>Runtime of O(1)</remarks>
+		public Item GetItem(string id)
 		{
 			_items.TryGetValue(id, out var value);
-			return value;
+			return value.DeepClone();
 		}
 
-		public static bool IsNode(string id)
+		/// <summary>
+		/// Get all items
+		/// </summary>
+		/// <returns>A enumerable containing all items in the database</returns>
+		public IEnumerable<Item> GetItems()
+		{
+			return _items.Values.AsEnumerable().DeepClone();
+		}
+
+		/// <summary>
+		/// Get items by discriminator function
+		/// </summary>
+		/// <param name="discriminator">Function which takes <see cref="Item"/> and</param>
+		/// <returns></returns>
+		public IEnumerable<Item> GetItems(Func<Item, bool> discriminator)
+		{
+			return _items.Values.Where(discriminator).DeepClone();
+		}
+
+		/// <summary>
+		/// Check if a id is associated to a node
+		/// </summary>
+		/// <param name="id">The id to check</param>
+		/// <returns><see langword="true"/> if the id is associated with a node</returns>
+		/// <remarks>Runtime of O(n)</remarks>
+		public bool IsNode(string id)
 		{
 			return _nodes.ContainsKey(id);
+		}
+
+		/// <summary>
+		/// Parse a item cache index file into a dictionary of <see cref="Item"/> and <see cref="ItemExtraInfo"/>
+		/// </summary>
+		/// <param name="filepath">The path to the cache index file</param>
+		/// <returns>The parsed cache index</returns>
+		public Dictionary<int, (Item item, ItemExtraInfo itemExtraInfo)> ParseItemCacheIndex(string filepath)
+		{
+			var parser = new CacheIndexParser(this);
+			return parser.Parse(filepath);
 		}
 	}
 }

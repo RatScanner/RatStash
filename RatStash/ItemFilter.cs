@@ -1,13 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace RatStash
 {
 	public class ItemFilter
 	{
 		[JsonProperty("Filter")]
-		public string[] Whitelist { get; set; }
+		public List<string> Whitelist { get; set; } = new List<string>();
 
 		[JsonProperty("ExcludedFilter")]
-		public string[] Blacklist { get; set; }
+		public List<string> Blacklist { get; set; } = new List<string>();
 	}
 }
