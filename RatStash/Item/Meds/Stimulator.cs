@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class Stimulator : Meds
-	{
-	}
+	public class Stimulator : Meds { }
 }

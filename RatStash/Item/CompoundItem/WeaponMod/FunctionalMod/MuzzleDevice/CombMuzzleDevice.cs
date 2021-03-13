@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class CombMuzzleDevice : MuzzleDevice
-	{
-	}
+	public class CombMuzzleDevice : MuzzleDevice { }
 }

@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class VisObservDevice : ArmoredEquipment
-	{
-	}
+	public class VisObservDevice : ArmoredEquipment { }
 }

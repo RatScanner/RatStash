@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class Pockets : SearchableItem
-	{
-	}
+	public class Pockets : SearchableItem { }
 }

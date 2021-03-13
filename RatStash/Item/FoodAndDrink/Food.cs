@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class Food : FoodAndDrink
-	{
-	}
+	public class Food : FoodAndDrink { }
 }

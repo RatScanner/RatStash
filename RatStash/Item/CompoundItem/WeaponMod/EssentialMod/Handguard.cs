@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class Handguard : EssentialMod
-	{
-	}
+	public class Handguard : EssentialMod { }
 }

@@ -1,6 +1,4 @@
 ﻿namespace RatStash
 {
-	public class Compensator : MuzzleDevice
-	{
-	}
+	public class Compensator : MuzzleDevice { }
 }

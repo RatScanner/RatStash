@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class ChargingHandle : GearMod
-	{
-	}
+	public class ChargingHandle : GearMod { }
 }

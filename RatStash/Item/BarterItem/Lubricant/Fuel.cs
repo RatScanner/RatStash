@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class Fuel : Lubricant
-	{
-	}
+	public class Fuel : Lubricant { }
 }

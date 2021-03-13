@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class PistolGrip : EssentialMod
-	{
-	}
+	public class PistolGrip : EssentialMod { }
 }

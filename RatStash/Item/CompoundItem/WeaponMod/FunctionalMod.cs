@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class FunctionalMod : WeaponMod
-	{
-	}
+	public class FunctionalMod : WeaponMod { }
 }

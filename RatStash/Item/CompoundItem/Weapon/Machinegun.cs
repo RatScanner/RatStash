@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class Machinegun : Weapon
-	{
-	}
+	public class Machinegun : Weapon { }
 }

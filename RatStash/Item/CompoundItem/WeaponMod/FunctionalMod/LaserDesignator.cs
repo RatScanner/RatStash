@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class LaserDesignator : FunctionalMod
-	{
-	}
+	public class LaserDesignator : FunctionalMod { }
 }

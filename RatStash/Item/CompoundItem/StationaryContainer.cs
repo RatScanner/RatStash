@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class StationaryContainer : CompoundItem
-	{
-	}
+	public class StationaryContainer : CompoundItem { }
 }

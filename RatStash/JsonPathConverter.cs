@@ -8,7 +8,11 @@ namespace RatStash
 {
 	internal class JsonPathConverter : JsonConverter
 	{
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		public override object ReadJson(
+			JsonReader reader,
+			Type objectType,
+			object existingValue,
+			JsonSerializer serializer)
 		{
 			var jo = JObject.Load(reader);
 			var targetObj = existingValue ?? Activator.CreateInstance(objectType);
@@ -16,7 +20,8 @@ namespace RatStash
 			foreach (var prop in objectType.GetProperties().Where(p => p.CanRead))
 			{
 				var pathAttribute = prop.GetCustomAttributes(true).OfType<JsonPropertyAttribute>().FirstOrDefault();
-				var converterAttribute = prop.GetCustomAttributes(true).OfType<JsonConverterAttribute>().FirstOrDefault();
+				var converterAttribute =
+					prop.GetCustomAttributes(true).OfType<JsonConverterAttribute>().FirstOrDefault();
 
 				var jsonPath = pathAttribute?.PropertyName ?? prop.Name;
 				var token = jo.SelectToken(jsonPath);

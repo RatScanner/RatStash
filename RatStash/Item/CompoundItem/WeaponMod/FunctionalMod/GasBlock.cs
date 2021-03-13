@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class GasBlock : FunctionalMod
-	{
-	}
+	public class GasBlock : FunctionalMod { }
 }

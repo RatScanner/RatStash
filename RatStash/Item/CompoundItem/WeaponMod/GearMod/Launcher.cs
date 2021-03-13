@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class Launcher : GearMod
-	{
-	}
+	public class Launcher : GearMod { }
 }

@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class Medikit : Meds
-	{
-	}
+	public class Medikit : Meds { }
 }

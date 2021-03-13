@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class RailCovers : FunctionalMod
-	{
-	}
+	public class RailCovers : FunctionalMod { }
 }

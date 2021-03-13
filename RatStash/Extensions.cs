@@ -3,6 +3,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("RatStashTest")]
+
 namespace RatStash
 {
 	internal static class Extensions

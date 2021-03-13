@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class MedicalSupplies : BarterItem
-	{
-	}
+	public class MedicalSupplies : BarterItem { }
 }

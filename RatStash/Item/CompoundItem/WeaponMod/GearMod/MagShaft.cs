@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class MagShaft : GearMod
-	{
-	}
+	public class MagShaft : GearMod { }
 }

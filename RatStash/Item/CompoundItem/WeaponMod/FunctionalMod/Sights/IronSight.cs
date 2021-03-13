@@ -1,6 +1,4 @@
 ﻿namespace RatStash
 {
-	public class IronSight : Sights
-	{
-	}
+	public class IronSight : Sights { }
 }

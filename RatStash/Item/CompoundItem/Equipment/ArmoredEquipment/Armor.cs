@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class Armor : ArmoredEquipment
-	{
-	}
+	public class Armor : ArmoredEquipment { }
 }

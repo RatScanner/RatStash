@@ -35,7 +35,6 @@ namespace RatStash
 		public float AimingSensitivity { get; set; }
 
 		[JsonProperty("sightModType")]
-
 		[JsonConverter(typeof(StringEnumConverter))]
 		public SightModType SightModType { get; set; }
 	}

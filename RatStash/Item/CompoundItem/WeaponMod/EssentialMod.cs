@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class EssentialMod : WeaponMod
-	{
-	}
+	public class EssentialMod : WeaponMod { }
 }

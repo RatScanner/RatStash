@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class Silencer : MuzzleDevice
-	{
-	}
+	public class Silencer : MuzzleDevice { }
 }

@@ -1,6 +1,4 @@
 namespace RatStash
 {
-	public class BuildingMaterial : BarterItem
-	{
-	}
+	public class BuildingMaterial : BarterItem { }
 }
