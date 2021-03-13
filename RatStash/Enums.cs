@@ -52,12 +52,14 @@ namespace RatStash
 
 	public enum ExplosionType
 	{
-		[EnumMember(Value = "")]
-		Empty,
+		[EnumMember(Value = "")] Empty,
+
 		[EnumMember(Value = "big_round_impact")]
 		BigRoundImpact,
+
 		[EnumMember(Value = "big_round_impact_explosive")]
 		BigRoundImpactExplosive,
+
 		[EnumMember(Value = "smallgrenade_expl")]
 		SmallGrenadeExplosive
 	}

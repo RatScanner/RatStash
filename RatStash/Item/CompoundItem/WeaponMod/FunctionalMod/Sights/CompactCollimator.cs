@@ -1,6 +1,4 @@
 ﻿namespace RatStash
 {
-	public class CompactCollimator : Sights
-	{
-	}
+	public class CompactCollimator : Sights { }
 }

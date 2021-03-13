@@ -67,6 +67,7 @@ namespace RatStash
 				var (_, right) = serializedExtraInfo.Split(": ");
 				extraInfo.AmmoIsUsed = bool.Parse(right);
 			}
+
 			extraInfo += DeserializeItemExtraInfo(item, serializedExtraInfo);
 
 			// Parse sub containers
@@ -77,6 +78,7 @@ namespace RatStash
 				if (subContainer.Trim() == "") continue;
 				tmp = DeserializeSubContainer(tmp.item, tmp.extraInfo, subContainer);
 			}
+
 			return tmp;
 		}
 
@@ -139,6 +141,7 @@ namespace RatStash
 				slot.ParentItem = typedTarget;
 				return true;
 			}
+
 			return false;
 		}
 
