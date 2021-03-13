@@ -6,6 +6,59 @@ Rat Stash is a open source library for parsing and using item data from [Escape 
 
 <br/>
 
+## How to use
+
+The fast way: Finding a item by it's Id
+```csharp
+Database database = new Database("items.json");
+Item item = database.GetItem("5644bd2b4bdc2d3b4c8b4572");
+Console.WriteLine(item.Name);   // > "AK-74N 5.45x39 assault rifle"
+```
+
+Finding a item by any other property
+```csharp
+Database database = new Database("items.json");
+IEnumerable<Item> items = database.GetItems(item => item.ShortName == "MRE");
+Item firstFoundItem = items.FirstOrDefault();   // First item matching our query
+Console.WriteLine(firstFoundItem.Name);         // > "MRE lunch box"
+```
+
+Getting all items in the database to perform custom operations
+```csharp
+Database database = new Database("items.json");
+IEnumerable<Item> items = database.GetItems();
+Console.WriteLine(items.Count());   // > 2245
+```
+
+---
+
+Parsing the item cache index
+```csharp
+Database database = new Database("items.json");
+Dictionary<int, (Item, ItemExtraInfo)> cacheIndex = database.ParseItemCacheIndex("index.json");
+
+// Get the Item and ItemExtraInfo from the item cache at index 12
+Item item = cacheIndex[12].item;
+ItemExtraInfo extraInfo = cacheIndex[12].itemExtraInfo;
+
+Console.WriteLine(item.ShortName)   // > "6B47"
+Console.WriteLine("Mod folded down: " + extraInfo.ItemIsToggled)
+
+// Only compound items have slots, hence we need to cast our item
+if (item is CompoundItem) {
+    var slots = (item as CompoundItem).Slots;
+
+    // Print the name of every item the slots of our item
+    // Important: Items often have nested slots!
+    foreach (Slot slot in slots) {
+        var itemInSlot = slot.ContainedItem;
+        Console.WriteLine(itemInSlot.Name);
+    }
+}
+```
+
+<br/>
+
 ## Support the project
 
 <br/>
