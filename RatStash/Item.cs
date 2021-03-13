@@ -46,6 +46,12 @@ namespace RatStash
 		[JsonProperty("ItemSound")]
 		public string ItemSound { get; set; }
 
+		[JsonProperty("Prefab")]
+		public Prefab Prefab { get; set; }
+
+		[JsonProperty("UsePrefab")]
+		public Prefab UsePrefab { get; set; }
+
 		[JsonProperty("StackObjectsCount")]
 		public int StackObjectsCount { get; set; }
 
