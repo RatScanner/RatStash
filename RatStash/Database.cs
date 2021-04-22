@@ -12,20 +12,24 @@ namespace RatStash
 		private readonly Dictionary<string, Item> _items = new Dictionary<string, Item>();
 		private readonly Dictionary<string, Type> _nodes = new Dictionary<string, Type>();
 
+		private Database() { }
+
+		/// <summary>
+		/// Create a new database object
+		/// </summary>
+		/// <param name="json">Item data as json string</param>
+		public static Database FromString(string json)
+		{
+			var db = new Database();
+			db.Load(json);
+			return db;
+		}
+
 		/// <summary>
 		/// Create a new database object
 		/// </summary>
 		/// <param name="filepath">Path to the file, containing the item data</param>
-		public Database(string filepath)
-		{
-			Load(filepath);
-		}
-
-		/// <summary>
-		/// Load the item data from a file
-		/// </summary>
-		/// <param name="filepath">Path to the file, containing the item data</param>
-		private void Load(string filepath)
+		public static Database FromFile(string filepath)
 		{
 			string json;
 			{
@@ -33,7 +37,15 @@ namespace RatStash
 				using var textReader = new StreamReader(fileStream);
 				json = textReader.ReadToEnd();
 			}
+			return FromString(json);
+		}
 
+		/// <summary>
+		/// Load the item data from a file
+		/// </summary>
+		/// <param name="json">Item data as json string</param>
+		private void Load(string json)
+		{
 			var jObj = JObject.Parse(json);
 			var items = jObj.Children();
 

@@ -71,7 +71,7 @@ namespace RatStashTest
 
 		private Database GetDatabase()
 		{
-			return new Database(Combine(BasePath, "TestData\\items.json"));
+			return Database.FromFile(Combine(BasePath, "TestData\\items.json"));
 		}
 
 		private Dictionary<int, (Item item, ItemExtraInfo itemExtraInfo)> GetCacheIndex(Database database)
