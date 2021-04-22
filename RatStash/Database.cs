@@ -192,6 +192,15 @@ namespace RatStash
 		}
 
 		/// <summary>
+		/// Get all items
+		/// </summary>
+		/// <returns>A enumerable containing all items in the database</returns>
+		public IEnumerable<Item> GetItems()
+		{
+			return _items.Values.AsEnumerable().DeepClone();
+		}
+
+		/// <summary>
 		/// Get a item by its id
 		/// </summary>
 		/// <param name="id">The 24 character id of the item</param>
@@ -204,19 +213,22 @@ namespace RatStash
 		}
 
 		/// <summary>
-		/// Get all items
+		/// Get a item with the highest rating determined by the rating function
 		/// </summary>
-		/// <returns>A enumerable containing all items in the database</returns>
-		public IEnumerable<Item> GetItems()
+		/// <param name="ratingFunction">Function to rate a item</param>
+		/// <returns>The item with the highest rating</returns>
+		/// <remarks>Particularly useful in combination with editor distance algorithms to get items by name / short name</remarks>
+		public Item GetItem(Func<Item, int> ratingFunction)
 		{
-			return _items.Values.AsEnumerable().DeepClone();
+			var rf = ratingFunction;
+			return _items.Values.Aggregate((agg, next) => rf(next) > rf(agg) ? next : agg).DeepClone();
 		}
 
 		/// <summary>
 		/// Get items by discriminator function
 		/// </summary>
-		/// <param name="discriminator">Function which takes <see cref="Item"/> and</param>
-		/// <returns></returns>
+		/// <param name="discriminator">Function to determine what items should be returned</param>
+		/// <returns>A enumerable containing all items, filtered by the discriminator</returns>
 		public IEnumerable<Item> GetItems(Func<Item, bool> discriminator)
 		{
 			return _items.Values.Where(discriminator).DeepClone();

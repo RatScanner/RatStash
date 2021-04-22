@@ -41,6 +41,23 @@ namespace RatStashTest
 		}
 
 		[Fact]
+		public void QueryMaxItem()
+		{
+			var database = GetDatabase();
+			var mostValuableItem = database.GetItem(item => item.CreditsPrice);
+			Assert.Equal("Mystery Ranch Terraplane Backpack", mostValuableItem.Name);
+		}
+
+		[Fact]
+		public void QueryByName()
+		{
+			var database = GetDatabase();
+			var query = "A8 Arms M0D X Gen 8";
+			var result = database.GetItem(item => LevenshteinDistance(item.Name, query) * -1);
+			Assert.Equal("A*B Arms MOD X Gen.3 keymod handguard for M700", result.Name);
+		}
+
+		[Fact]
 		public void QueryAllItems()
 		{
 			var database = GetDatabase();
@@ -67,6 +84,49 @@ namespace RatStashTest
 			Assert.Equal(2, slots.Count);
 			Assert.Equal("mod_nvg", slots[0].Name);
 			Assert.Equal("GPNVG-18", slots[0].ContainedItem.ShortName);
+		}
+
+		private static int LevenshteinDistance(string target, string value)
+		{
+			if (target.Length > value.Length) target = target.Substring(0, value.Length);
+
+			if (target.Length == 0) return value.Length;
+			if (value.Length == 0) return target.Length;
+
+			var costs = new int[target.Length];
+
+			// Add indexing for insertion to first row
+			for (var i = 0; i < costs.Length;) costs[i] = ++i;
+
+			for (var i = 0; i < value.Length; i++)
+			{
+				// Cost of the first index
+				var cost = i;
+				var additionCost = i;
+
+				// Cache value for inner loop to avoid index lookup and bonds checking, profiled this is quicker
+				var value2Char = value[i];
+
+				for (var j = 0; j < target.Length; j++)
+				{
+					var insertionCost = cost;
+					cost = additionCost;
+
+					// Assigning this here reduces the array reads we do
+					additionCost = costs[j];
+
+					if (value2Char != target[j])
+					{
+						if (insertionCost < cost) cost = insertionCost;
+						if (additionCost < cost) cost = additionCost;
+						++cost;
+					}
+
+					costs[j] = cost;
+				}
+			}
+
+			return costs[^1];
 		}
 
 		private Database GetDatabase()
