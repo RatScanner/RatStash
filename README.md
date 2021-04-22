@@ -10,14 +10,14 @@ Rat Stash is a open source library for parsing and using item data from [Escape 
 
 The fast way: Finding a item by it's Id
 ```csharp
-Database database = new Database("items.json");
+Database database = Database.FromFile("items.json");
 Item item = database.GetItem("5644bd2b4bdc2d3b4c8b4572");
 Console.WriteLine(item.Name);   // > "AK-74N 5.45x39 assault rifle"
 ```
 
 Finding a item by any other property
 ```csharp
-Database database = new Database("items.json");
+Database database = Database.FromFile("items.json");
 IEnumerable<Item> items = database.GetItems(item => item.ShortName == "MRE");
 Item firstFoundItem = items.FirstOrDefault();   // First item matching our query
 Console.WriteLine(firstFoundItem.Name);         // > "MRE lunch box"
@@ -25,7 +25,7 @@ Console.WriteLine(firstFoundItem.Name);         // > "MRE lunch box"
 
 Getting all items in the database to perform custom operations
 ```csharp
-Database database = new Database("items.json");
+Database database = Database.FromFile("items.json");
 IEnumerable<Item> items = database.GetItems();
 Console.WriteLine(items.Count());   // > 2245
 ```
@@ -34,7 +34,7 @@ Console.WriteLine(items.Count());   // > 2245
 
 Parsing the item cache index
 ```csharp
-Database database = new Database("items.json");
+Database database = Database.FromFile("items.json");
 Dictionary<int, (Item, ItemExtraInfo)> cacheIndex = database.ParseItemCacheIndex("index.json");
 
 // Get the Item and ItemExtraInfo from the item cache at index 12
