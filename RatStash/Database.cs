@@ -18,8 +18,11 @@ namespace RatStash
 		/// Create a new database object
 		/// </summary>
 		/// <param name="json">Item data as json string</param>
-		public static Database FromString(string json)
+		/// /// <param name="cleanStrings">Replace cyrillic characters with similar looking latin characters</param>
+		public static Database FromString(string json, bool cleanStrings = true)
 		{
+			if (cleanStrings) json = CleanString(json);
+
 			var db = new Database();
 			db.Load(json);
 			return db;
@@ -29,7 +32,8 @@ namespace RatStash
 		/// Create a new database object
 		/// </summary>
 		/// <param name="filepath">Path to the file, containing the item data</param>
-		public static Database FromFile(string filepath)
+		/// <param name="cleanStrings">Replace cyrillic characters with similar looking latin characters</param>
+		public static Database FromFile(string filepath, bool cleanStrings = true)
 		{
 			string json;
 			{
@@ -37,7 +41,25 @@ namespace RatStash
 				using var textReader = new StreamReader(fileStream);
 				json = textReader.ReadToEnd();
 			}
-			return FromString(json);
+			return FromString(json, cleanStrings);
+		}
+
+		/// <summary>
+		/// Replace cyrillic characters with similar looking latin characters
+		/// </summary>
+		/// <param name="input">The string which contains cyrillic characters</param>
+		/// <returns>The input string with replace characters</returns>
+		private static string CleanString(string input)
+		{
+			const string cyrillicChars = "АВЕЅZІКМНОРСТХШѴУ";
+			const string latinChars = "ABESZIKMHOPCTXWVY";
+
+			for (var i = 0; i < cyrillicChars.Length; i++)
+			{
+				input = input.Replace(cyrillicChars[i], latinChars[i]);
+			}
+
+			return input;
 		}
 
 		/// <summary>

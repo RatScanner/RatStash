@@ -67,6 +67,26 @@ namespace RatStashTest
 		}
 
 		[Fact]
+		public void CheckCleanDatabase()
+		{
+			var database = GetDatabase();
+			var item = database.GetItem("59e6658b86f77411d949b250");
+			Assert.Equal(".366 TKM Geksa", item.Name);  // "TKM" are latin chars
+			Assert.Equal("Geksa", item.ShortName);
+			Assert.Equal(".366 TKM Geksa cartridge", item.Description); // "TKM" are latin chars
+		}
+
+		[Fact]
+		public void CheckUncleanDatabase()
+		{
+			var database = GetDatabase(false);
+			var item = database.GetItem("59e6658b86f77411d949b250");
+			Assert.Equal(".366 ТКМ Geksa", item.Name);  // "ТКМ" are cyrillic chars
+			Assert.Equal("Geksa", item.ShortName);
+			Assert.Equal(".366 ТКМ Geksa cartridge", item.Description); // "ТКМ" are cyrillic chars
+		}
+
+		[Fact]
 		public void ParseItemCacheIndex()
 		{
 			var database = GetDatabase();
@@ -129,9 +149,9 @@ namespace RatStashTest
 			return costs[^1];
 		}
 
-		private Database GetDatabase()
+		private Database GetDatabase(bool cleaned = true)
 		{
-			return Database.FromFile(Combine(BasePath, "TestData\\items.json"));
+			return Database.FromFile(Combine(BasePath, "TestData\\items.json"), cleaned);
 		}
 
 		private Dictionary<int, (Item item, ItemExtraInfo itemExtraInfo)> GetCacheIndex(Database database)
