@@ -87,6 +87,21 @@ namespace RatStashTest
 		}
 
 		[Fact]
+		public void FilterDatabase()
+		{
+			var database = GetDatabase();
+			var filteredDatabase = GetDatabase().Filter(item => !item.QuestItem);
+
+			Assert.Equal(2245, database.GetItems().Count());
+			Assert.Equal(2203, filteredDatabase.GetItems().Count());
+
+			Assert.NotNull(database.GetItem("5939a00786f7742fe8132936"));
+			Assert.Null(filteredDatabase.GetItem("5939a00786f7742fe8132936"));
+			Assert.NotNull(database.GetItem("56742c2e4bdc2d95058b456d"));
+			Assert.NotNull(filteredDatabase.GetItem("56742c2e4bdc2d95058b456d"));
+		}
+
+		[Fact]
 		public void ParseItemCacheIndex()
 		{
 			var database = GetDatabase();

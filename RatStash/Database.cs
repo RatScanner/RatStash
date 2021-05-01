@@ -9,8 +9,8 @@ namespace RatStash
 {
 	public class Database
 	{
-		private readonly Dictionary<string, Item> _items = new Dictionary<string, Item>();
-		private readonly Dictionary<string, Type> _nodes = new Dictionary<string, Type>();
+		private Dictionary<string, Item> _items = new Dictionary<string, Item>();
+		private Dictionary<string, Type> _nodes = new Dictionary<string, Type>();
 
 		private Database() { }
 
@@ -249,11 +249,11 @@ namespace RatStash
 		/// <summary>
 		/// Get items by discriminator function
 		/// </summary>
-		/// <param name="discriminator">Function to determine what items should be returned</param>
-		/// <returns>A enumerable containing all items, filtered by the discriminator</returns>
-		public IEnumerable<Item> GetItems(Func<Item, bool> discriminator)
+		/// <param name="filter">Function to determine what items should be returned</param>
+		/// <returns>A enumerable containing all items, passing the filter</returns>
+		public IEnumerable<Item> GetItems(Func<Item, bool> filter)
 		{
-			return _items.Values.Where(discriminator).DeepClone();
+			return _items.Values.Where(filter).DeepClone();
 		}
 
 		/// <summary>
@@ -265,6 +265,21 @@ namespace RatStash
 		public bool IsNode(string id)
 		{
 			return _nodes.ContainsKey(id);
+		}
+
+		/// <summary>
+		/// Create a new <see cref="Database"/> instance, containing all items, passing the filter
+		/// </summary>
+		/// <param name="filter">Function to determine what items should be included</param>
+		/// <returns>A new <see cref="Database"/> instance</returns>
+		public Database Filter(Func<Item, bool> filter)
+		{
+			var db = new Database
+			{
+				_items = _items.Where(map => filter(map.Value)).ToDictionary(x => x.Key, x => x.Value).DeepClone(),
+				_nodes = _nodes.DeepClone()
+			};
+			return db;
 		}
 
 		/// <summary>
