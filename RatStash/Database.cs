@@ -85,16 +85,23 @@ namespace RatStash
 			foreach (var item in items)
 			{
 				var itemInfo = item.First;
-				if ((string)itemInfo["_type"] == "Item")
+				if ((string)itemInfo["_type"] != "Item") continue;
+
+				var parent = ResolveParentType((string)itemInfo["_parent"]);
+				var id = (string)itemInfo["_id"];
+				try
 				{
-					var parent = ResolveParentType((string)itemInfo["_parent"]);
-					var id = (string)itemInfo["_id"];
 					var parsedItem = (Item)itemInfo["_props"].ToObject(parent);
-					if (parsedItem != null)
-					{
-						parsedItem.Id = id;
-						_items.Add(id, parsedItem);
-					}
+					if (parsedItem == null) continue;
+					parsedItem.Id = id;
+					_items.Add(id, parsedItem);
+				}
+				catch
+				{
+					// ignored
+#if DEBUG
+					throw;
+#endif
 				}
 			}
 		}
