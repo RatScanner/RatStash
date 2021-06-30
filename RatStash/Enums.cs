@@ -83,6 +83,7 @@ namespace RatStash
 		Eyes,
 		Jaws,
 		Nape,
+		LowerNape,
 		Top
 	}
 
