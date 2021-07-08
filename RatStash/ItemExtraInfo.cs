@@ -31,6 +31,12 @@ namespace RatStash
 		/// </summary>
 		public int MaxVisibleAmmo;
 
+		/// <summary>
+		/// Combine two item extra info objects into one
+		/// </summary>
+		/// <param name="extraInfoL">First object</param>
+		/// <param name="extraInfoR">Second object</param>
+		/// <returns>Combined object</returns>
 		public static ItemExtraInfo operator +(ItemExtraInfo extraInfoL, ItemExtraInfo extraInfoR)
 		{
 			return new ItemExtraInfo
