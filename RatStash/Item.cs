@@ -151,5 +151,50 @@ namespace RatStash
 
 		[JsonProperty("DiscardingBlock")]
 		public bool DiscardingBlock { get; set; }
+
+		public override bool Equals(object obj)
+		{
+			if ((obj == null) || GetType() != obj.GetType()) return false;
+
+			if (this is CompoundItem thisItem && (Item)obj is CompoundItem otherItem)
+			{
+				if (thisItem.Slots.Count != otherItem.Slots.Count) return false;
+				for (var i = 0; i < thisItem.Slots.Count; i++)
+				{
+					var thisContainedItem = thisItem.Slots[i].ContainedItem;
+					var otherContainedItem = otherItem.Slots[i].ContainedItem;
+					if (!(thisContainedItem.Equals(otherContainedItem))) return false;
+				}
+			}
+
+			return Id == ((Item)obj).Id;
+		}
+
+		public override int GetHashCode()
+		{
+			var hashCode = 17 * 29 + Id.GetHashCode();
+
+			if (this is CompoundItem compoundItem)
+			{
+				foreach (var slot in compoundItem.Slots)
+				{
+					var item = slot.ContainedItem;
+					hashCode *= 29 + item.GetHashCode();
+				}
+			}
+
+			return hashCode;
+		}
+
+		public static bool operator ==(Item lhs, Item rhs)
+		{
+			if (ReferenceEquals(lhs, rhs)) return true;
+			if (ReferenceEquals(lhs, null)) return false;
+			if (ReferenceEquals(rhs, null)) return false;
+
+			return lhs.Equals(rhs);
+		}
+
+		public static bool operator !=(Item lhs, Item rhs) => !(lhs == rhs);
 	}
 }

@@ -47,5 +47,39 @@ namespace RatStash
 				MaxVisibleAmmo = Math.Max(extraInfoL.MaxVisibleAmmo, extraInfoR.MaxVisibleAmmo)
 			};
 		}
+
+		public override bool Equals(object obj)
+		{
+			if ((obj == null) || GetType() != obj.GetType()) return false;
+
+			var extraInfo = (ItemExtraInfo)obj;
+
+			if (ItemIsToggled != extraInfo.ItemIsToggled) return false;
+			if (AmmoIsUsed != extraInfo.AmmoIsUsed) return false;
+			if (WeaponIsFolded != extraInfo.WeaponIsFolded) return false;
+			if (MaxVisibleAmmo != extraInfo.MaxVisibleAmmo) return false;
+			return true;
+		}
+
+		public override int GetHashCode()
+		{
+			var hashCode = 0;
+			hashCode += ItemIsToggled ? (1 << 0) : 0;
+			hashCode += AmmoIsUsed ? (1 << 1) : 0;
+			hashCode += WeaponIsFolded ? (1 << 2) : 0;
+			hashCode += MaxVisibleAmmo << 3;
+			return hashCode;
+		}
+
+		public static bool operator ==(ItemExtraInfo lhs, ItemExtraInfo rhs)
+		{
+			if (ReferenceEquals(lhs, rhs)) return true;
+			if (ReferenceEquals(lhs, null)) return false;
+			if (ReferenceEquals(rhs, null)) return false;
+
+			return lhs.Equals(rhs);
+		}
+
+		public static bool operator !=(ItemExtraInfo lhs, ItemExtraInfo rhs) => !(lhs == rhs);
 	}
 }
