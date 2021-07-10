@@ -18,9 +18,9 @@ namespace RatStash
 		TracerRed,
 	}
 
-	internal static class TaxonomyColorConverter
+	public static class TaxonomyColorConverter
 	{
-		private static readonly Dictionary<TaxonomyColor, Color> _colorDict = new Dictionary<TaxonomyColor, Color>()
+		private static readonly Dictionary<TaxonomyColor, Color> ColorDict = new Dictionary<TaxonomyColor, Color>()
 		{
 			{
 				TaxonomyColor.Default,
@@ -74,7 +74,7 @@ namespace RatStash
 
 		public static Color ToColor(this TaxonomyColor taxonomyColor)
 		{
-			return _colorDict[taxonomyColor];
+			return ColorDict[taxonomyColor];
 		}
 	}
 }
