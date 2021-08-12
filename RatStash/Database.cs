@@ -13,6 +13,12 @@ namespace RatStash
 		private Dictionary<string, Item> _items = new();
 		private Dictionary<string, Type> _nodes = new();
 
+		private CacheIndexParser _indexParser;
+		private CacheHashIndexParser _hashIndexParser;
+
+		private CacheIndexParser CacheIndexParserInstance => _indexParser ??= new CacheIndexParser(this);
+		private CacheHashIndexParser CacheHashIndexParserInstance => _hashIndexParser ??= new CacheHashIndexParser(this);
+
 		private Database() { }
 
 		/// <summary>
@@ -298,8 +304,7 @@ namespace RatStash
 		[Obsolete("This method is deprecated as of EfT 0.12.11.2.13615, use ParseItemCacheHashIndex")]
 		public Dictionary<int, (Item item, ItemExtraInfo itemExtraInfo)> ParseItemCacheIndex(string filepath)
 		{
-			var parser = new CacheIndexParser(this);
-			return parser.Parse(filepath);
+			return CacheIndexParserInstance.Parse(filepath);
 		}
 
 		/// <summary>
@@ -310,8 +315,7 @@ namespace RatStash
 		/// <remarks>The returned dictionary will only include single items</remarks>
 		public Dictionary<int, (Item item, ItemExtraInfo itemExtraInfo)> ParseItemCacheHashIndex(string filepath)
 		{
-			var parser = new CacheHashIndexParser(this);
-			return parser.Parse(filepath);
+			return CacheHashIndexParserInstance.Parse(filepath);
 		}
 	}
 }
