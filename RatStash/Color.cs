@@ -31,7 +31,7 @@ namespace RatStash
 
 		public static implicit operator Color(System.Drawing.Color c)
 		{
-			return new Color(c.A, c.R, c.G, c.B);
+			return new(c.A, c.R, c.G, c.B);
 		}
 	}
 }

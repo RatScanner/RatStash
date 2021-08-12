@@ -23,7 +23,7 @@ namespace RatStash
 		public float CenterOfImpact { get; set; }
 
 		[JsonProperty("Chambers")]
-		public List<Slot> Chambers { get; set; } = new List<Slot>();
+		public List<Slot> Chambers { get; set; } = new();
 
 		[JsonProperty("CompactHandling")]
 		public bool CompactHandling { get; set; }
@@ -171,7 +171,7 @@ namespace RatStash
 		public string WeaponClass { get; set; }
 
 		[JsonProperty("weapFireType", ItemConverterType = typeof(StringEnumConverter))]
-		public List<FireMode> WeaponFireType { get; set; } = new List<FireMode>();
+		public List<FireMode> WeaponFireType { get; set; } = new();
 
 		[JsonProperty("weapUseType")]
 		[JsonConverter(typeof(StringEnumConverter))]

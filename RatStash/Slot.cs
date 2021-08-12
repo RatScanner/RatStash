@@ -13,7 +13,7 @@ namespace RatStash
 		public string Id { get; set; }
 
 		[JsonProperty("_props.filters")]
-		public List<ItemFilter> Filters { get; set; } = new List<ItemFilter>();
+		public List<ItemFilter> Filters { get; set; } = new();
 
 		[JsonProperty("_required")]
 		public bool Required { get; set; }

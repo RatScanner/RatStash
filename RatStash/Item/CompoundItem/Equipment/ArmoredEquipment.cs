@@ -47,10 +47,10 @@ namespace RatStash
 		public int ArmorClass { get; set; }
 
 		[JsonProperty("armorZone", ItemConverterType = typeof(StringEnumConverter))]
-		public List<ArmorZone> ArmorZone { get; set; } = new List<ArmorZone>();
+		public List<ArmorZone> ArmorZone { get; set; } = new();
 
 		[JsonProperty("headSegments", ItemConverterType = typeof(StringEnumConverter))]
-		public List<HeadSegment> HeadSegments { get; set; } = new List<HeadSegment>();
+		public List<HeadSegment> HeadSegments { get; set; } = new();
 
 		[JsonProperty("mousePenalty")]
 		public int MousePenalty { get; set; }

@@ -122,7 +122,7 @@ namespace RatStash
 		public bool CanRequireOnRagfair { get; set; }
 
 		[JsonProperty("ConflictingItems")]
-		public List<string> ConflictingItems { get; set; } = new List<string>();
+		public List<string> ConflictingItems { get; set; } = new();
 
 		[JsonProperty("FixedPrice")]
 		public bool FixedPrice { get; set; }

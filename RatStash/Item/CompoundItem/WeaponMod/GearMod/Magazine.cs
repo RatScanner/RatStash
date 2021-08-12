@@ -18,7 +18,7 @@ namespace RatStash
 		public bool CanHit { get; set; }
 
 		[JsonProperty("Cartridges")]
-		public List<StackSlot> Cartridges { get; set; } = new List<StackSlot>();
+		public List<StackSlot> Cartridges { get; set; } = new();
 
 		[JsonProperty("CheckOverride")]
 		public int CheckOverride { get; set; }

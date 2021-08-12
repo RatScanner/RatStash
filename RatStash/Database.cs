@@ -10,8 +10,8 @@ namespace RatStash
 {
 	public class Database
 	{
-		private Dictionary<string, Item> _items = new Dictionary<string, Item>();
-		private Dictionary<string, Type> _nodes = new Dictionary<string, Type>();
+		private Dictionary<string, Item> _items = new();
+		private Dictionary<string, Type> _nodes = new();
 
 		private Database() { }
 

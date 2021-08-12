@@ -8,16 +8,16 @@ namespace RatStash
 	public class Sights : FunctionalMod
 	{
 		[JsonProperty("AimSensitivity")]
-		public List<List<float>> AimSensitivity { get; set; } = new List<List<float>>();
+		public List<List<float>> AimSensitivity { get; set; } = new();
 
 		[JsonProperty("CalibrationDistances")]
-		public List<List<int>> CalibrationDistances { get; set; } = new List<List<int>>();
+		public List<List<int>> CalibrationDistances { get; set; } = new();
 
 		[JsonProperty("ModesCount")]
-		public List<int> ModesCount { get; set; } = new List<int>();
+		public List<int> ModesCount { get; set; } = new();
 
 		[JsonProperty("OpticCalibrationDistances")]
-		public List<int> OpticCalibrationDistances { get; set; } = new List<int>();
+		public List<int> OpticCalibrationDistances { get; set; } = new();
 
 		[JsonProperty("ScopesCount")]
 		public int ScopesCount { get; set; }
@@ -26,7 +26,7 @@ namespace RatStash
 		public int SightModesCount { get; set; }
 
 		[JsonProperty("Zooms")]
-		public List<List<int>> Zooms { get; set; } = new List<List<int>>();
+		public List<List<int>> Zooms { get; set; } = new();
 
 		[JsonProperty("aimingSensitivity")]
 		public float AimingSensitivity { get; set; }

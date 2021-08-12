@@ -7,7 +7,7 @@ namespace RatStash
 	public class LockingContainer : CompoundItem
 	{
 		[JsonProperty("KeyIds")]
-		public List<string> KeyIds { get; set; } = new List<string>();
+		public List<string> KeyIds { get; set; } = new();
 
 		[JsonProperty("TagColor")]
 		public int TagColor { get; set; }

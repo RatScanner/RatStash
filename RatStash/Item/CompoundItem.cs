@@ -10,12 +10,12 @@ namespace RatStash
 		public bool CanPutIntoDuringTheRaid { get; set; }
 
 		[JsonProperty("CantRemoveFromSlotsDuringRaid")]
-		public List<EquipmentSlot> CantRemoveFromSlotsDuringRaid { get; set; } = new List<EquipmentSlot>();
+		public List<EquipmentSlot> CantRemoveFromSlotsDuringRaid { get; set; } = new();
 
 		[JsonProperty("Grids")]
-		public List<Grid> Grids { get; set; } = new List<Grid>();
+		public List<Grid> Grids { get; set; } = new();
 
 		[JsonProperty("Slots")]
-		public List<Slot> Slots { get; set; } = new List<Slot>();
+		public List<Slot> Slots { get; set; } = new();
 	}
 }

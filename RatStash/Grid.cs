@@ -21,6 +21,6 @@ namespace RatStash
 		public int MaxWeight { get; set; }
 
 		[JsonProperty("filters")]
-		public List<ItemFilter> Filters { get; set; } = new List<ItemFilter>();
+		public List<ItemFilter> Filters { get; set; } = new();
 	}
 }

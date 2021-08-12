@@ -8,13 +8,13 @@ namespace RatStash
 	public class PortableContainer : SearchableItem
 	{
 		[JsonProperty("containType")]
-		public List<object> ContainType { get; set; } = new List<object>();
+		public List<object> ContainType { get; set; } = new();
 
 		[JsonProperty("isSecured")]
 		public bool IsSecured { get; set; }
 
 		[JsonProperty("lootFilter")]
-		public List<object> LootFilter { get; set; } = new List<object>();
+		public List<object> LootFilter { get; set; } = new();
 
 		[JsonProperty("maxCountSpawn")]
 		public int MaxCountSpawn { get; set; }
@@ -23,7 +23,7 @@ namespace RatStash
 		public int MinCountSpawn { get; set; }
 
 		[JsonProperty("openedByKeyID")]
-		public List<object> OpenedByKeyId { get; set; } = new List<object>();
+		public List<object> OpenedByKeyId { get; set; } = new();
 
 		[JsonProperty("sizeHeight")]
 		public int SizeHeight { get; set; }

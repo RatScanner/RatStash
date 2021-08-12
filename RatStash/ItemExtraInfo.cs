@@ -39,7 +39,7 @@ namespace RatStash
 		/// <returns>Combined object</returns>
 		public static ItemExtraInfo operator +(ItemExtraInfo extraInfoL, ItemExtraInfo extraInfoR)
 		{
-			return new ItemExtraInfo
+			return new()
 			{
 				ItemIsToggled = extraInfoL.ItemIsToggled || extraInfoR.ItemIsToggled,
 				AmmoIsUsed = extraInfoL.AmmoIsUsed || extraInfoR.AmmoIsUsed,

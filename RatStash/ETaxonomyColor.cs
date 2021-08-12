@@ -20,7 +20,7 @@ namespace RatStash
 
 	public static class TaxonomyColorConverter
 	{
-		private static readonly Dictionary<TaxonomyColor, Color> ColorDict = new Dictionary<TaxonomyColor, Color>()
+		private static readonly Dictionary<TaxonomyColor, Color> ColorDict = new()
 		{
 			{
 				TaxonomyColor.Default,

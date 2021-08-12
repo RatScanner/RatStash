@@ -16,7 +16,7 @@ namespace RatStash
 		public int MaxCount { get; set; }
 
 		[JsonProperty("_props.filters")]
-		public List<ItemFilter> Filters { get; set; } = new List<ItemFilter>();
+		public List<ItemFilter> Filters { get; set; } = new();
 
 		public Item ContainedItem { get; set; }
 

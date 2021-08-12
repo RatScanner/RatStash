@@ -37,7 +37,7 @@ namespace RatStash
 		/// <returns>The reversed string</returns>
 		internal static string Reverse(this string str)
 		{
-			return new string(str.ToCharArray().Reverse().ToArray());
+			return new(str.ToCharArray().Reverse().ToArray());
 		}
 	}
 }
