@@ -30,4 +30,4 @@ jobs:
           TAG_COMMIT: true
           TAG_FORMAT: v*
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          INCLUDE_SYMBOLS: true
+          #NCLUDE_SYMBOLS: true
