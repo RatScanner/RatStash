@@ -121,6 +121,19 @@ namespace RatStashTest
 			Assert.Equal("GPNVG-18", slots[0].ContainedItem.ShortName);
 		}
 
+		[Fact]
+		public void ParseItemCacheHashIndex()
+		{
+			var database = GetDatabase();
+			var cacheIndex = GetCacheHashIndex(database);
+			Assert.True(cacheIndex.Count >= 36);
+
+			var item = cacheIndex[14].item;
+
+			Assert.Equal("PVS-14", item.ShortName);
+			Assert.True(item is CompoundItem);
+		}
+
 		private static int LevenshteinDistance(string target, string value)
 		{
 			if (target.Length > value.Length) target = target.Substring(0, value.Length);
@@ -173,6 +186,12 @@ namespace RatStashTest
 		{
 			var cacheIndexPath = Combine(BasePath, "TestData\\index.json");
 			return database.ParseItemCacheIndex(cacheIndexPath);
+		}
+
+		private Dictionary<int, (Item item, ItemExtraInfo itemExtraInfo)> GetCacheHashIndex(Database database)
+		{
+			var cacheHashIndexPath = Combine(BasePath, "TestData\\hashIndex.json");
+			return database.ParseItemCacheHashIndex(cacheHashIndexPath);
 		}
 	}
 }

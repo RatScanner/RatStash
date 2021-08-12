@@ -7,7 +7,7 @@ namespace RatStash
 	public class AmmoContainer : StackableItem
 	{
 		[JsonProperty("StackSlots")]
-		public List<object> StackSlots { get; set; } = new List<object>();
+		public List<StackSlot> StackSlots { get; set; } = new List<StackSlot>();
 
 		[JsonProperty("ammoCaliber")]
 		public string AmmoCaliber { get; set; }

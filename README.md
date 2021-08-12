@@ -35,26 +35,8 @@ Console.WriteLine(items.Count());   // > 2245
 Parsing the item cache index
 ```csharp
 Database database = Database.FromFile("items.json");
-Dictionary<int, (Item, ItemExtraInfo)> cacheIndex = database.ParseItemCacheIndex("index.json");
-
-// Get the Item and ItemExtraInfo from the item cache at index 12
-Item item = cacheIndex[12].item;
-ItemExtraInfo extraInfo = cacheIndex[12].itemExtraInfo;
-
-Console.WriteLine(item.ShortName)   // > "6B47"
-Console.WriteLine("Mod folded down: " + extraInfo.ItemIsToggled)
-
-// Only compound items have slots, hence we need to cast our item
-if (item is CompoundItem) {
-    var slots = (item as CompoundItem).Slots;
-
-    // Print the name of every item the slots of our item
-    // Important: Items often have nested slots!
-    foreach (Slot slot in slots) {
-        var itemInSlot = slot.ContainedItem;
-        Console.WriteLine(itemInSlot.Name);
-    }
-}
+Dictionary<int, (Item, ItemExtraInfo)> cacheIndex = database.ParseItemCacheHashIndex("index.json");
+Console.WriteLine(cacheIndex[14].item.ShortName);
 ```
 
 <br/>
