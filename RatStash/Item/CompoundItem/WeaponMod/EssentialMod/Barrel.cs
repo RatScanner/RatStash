@@ -11,6 +11,6 @@ namespace RatStash
 		public bool IsSilencer { get; set; }
 
 		[JsonProperty("ShotgunDispersion")]
-		public int ShotgunDispersion { get; set; }
+		public float ShotgunDispersion { get; set; }
 	}
 }

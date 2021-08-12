@@ -25,9 +25,6 @@ namespace RatStash
 		[JsonProperty("SightModesCount")]
 		public int SightModesCount { get; set; }
 
-		[JsonProperty("SightingRange")]
-		public int SightingRange { get; set; }
-
 		[JsonProperty("Zooms")]
 		public List<List<int>> Zooms { get; set; } = new List<List<int>>();
 

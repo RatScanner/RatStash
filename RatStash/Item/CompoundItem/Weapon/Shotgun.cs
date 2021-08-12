@@ -5,6 +5,6 @@ namespace RatStash
 	public class Shotgun : Weapon
 	{
 		[JsonProperty("ShotgunDispersion")]
-		public int ShotgunDispersion { get; set; }
+		public float ShotgunDispersion { get; set; }
 	}
 }
