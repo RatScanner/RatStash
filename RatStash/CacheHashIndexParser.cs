@@ -107,7 +107,9 @@ namespace RatStash
 			switch (item)
 			{
 				case NightVision:
+				case ThermalVision:
 				case ArmoredEquipment:
+					if (item is ArmoredEquipment { HasHinge: false }) break;
 					hash ^= 23 + (itemExtraInfo.ItemIsToggled ? 1 : 0);
 					break;
 				case Weapon:
