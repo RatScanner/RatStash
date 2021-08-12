@@ -165,7 +165,7 @@ namespace RatStash
 		public bool IsFastReload { get; set; }
 
 		[JsonProperty("shotgunDispersion")]
-		public int ShotgunDispersion { get; set; }
+		public int ShotgunDispersionInt { get; set; }
 
 		[JsonProperty("weapClass")]
 		public string WeaponClass { get; set; }
