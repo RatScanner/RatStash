@@ -9,9 +9,30 @@ namespace RatStashTest
 	public class DatabaseTest : TestEnvironment
 	{
 		[Fact]
-		public void LoadDatabase()
+		public void LoadEnglishDatabase()
 		{
-			GetDatabase();
+			var database = GetDatabase();
+			var item = database.GetItem("59e7635f86f7742cbf2c1095");
+			Assert.Equal("BNTI Module-3M body armor", item.Name);
+			Assert.Equal(22813, item.CreditsPrice);
+		}
+
+		[Fact]
+		public void LoadGermanDatabase()
+		{
+			var database = GetDatabase("ge");
+			var item = database.GetItem("59e7635f86f7742cbf2c1095");
+			Assert.Equal("Modulare Schutzweste von 3M", item.Name);
+			Assert.Equal(22813, item.CreditsPrice);
+		}
+
+		[Fact]
+		public void LoadRussianDatabase()
+		{
+			var database = GetDatabase("ru");
+			var item = database.GetItem("59e7635f86f7742cbf2c1095");
+			Assert.Equal("Бронежилет БНТИ \"Модуль-3М\"", item.Name);
+			Assert.Equal(22813, item.CreditsPrice);
 		}
 
 		[Fact]
@@ -45,16 +66,16 @@ namespace RatStashTest
 		{
 			var database = GetDatabase();
 			var mostValuableItem = database.GetItem(item => item.CreditsPrice);
-			Assert.Equal("Mystery Ranch Terraplane Backpack", mostValuableItem.Name);
+			Assert.Equal("Secure container Kappa", mostValuableItem.Name);
 		}
 
 		[Fact]
 		public void QueryByName()
 		{
 			var database = GetDatabase();
-			var query = "A8 Arms M0D X Gen 8";
+			var query = "A8H 12 p0Iymr";
 			var result = database.GetItem(item => LevenshteinDistance(item.Name, query) * -1);
-			Assert.Equal("A*B Arms MOD X Gen.3 keymod handguard for M700", result.Name);
+			Assert.StartsWith("ASh-12 polymer handguard", result.Name);
 		}
 
 		[Fact]
@@ -62,24 +83,25 @@ namespace RatStashTest
 		{
 			var database = GetDatabase();
 			var items = database.GetItems().ToArray();
-			Assert.Equal(2245, items.Length);
+			Assert.Equal(2559, items.Length);
 			Assert.DoesNotContain(null, items);
 		}
 
 		[Fact]
 		public void CheckCleanDatabase()
 		{
-			var database = GetDatabase();
+			var database = GetDatabase("en", true);
 			var item = database.GetItem("59e6658b86f77411d949b250");
 			Assert.Equal(".366 TKM Geksa", item.Name);  // "TKM" are latin chars
 			Assert.Equal("Geksa", item.ShortName);
-			Assert.Equal(".366 TKM Geksa cartridge", item.Description); // "TKM" are latin chars
+			Assert.StartsWith("A .366 TKM (9.55x39mm) Geksa cartridge with ", item.Description); // "TKM" are latin chars
 		}
 
 		[Fact]
 		public void CheckUncleanDatabase()
 		{
-			var database = GetDatabase(false);
+			return; // TODO
+			var database = GetDatabase();
 			var item = database.GetItem("59e6658b86f77411d949b250");
 			Assert.Equal(".366 ТКМ Geksa", item.Name);  // "ТКМ" are cyrillic chars
 			Assert.Equal("Geksa", item.ShortName);
@@ -92,8 +114,8 @@ namespace RatStashTest
 			var database = GetDatabase();
 			var filteredDatabase = GetDatabase().Filter(item => !item.QuestItem);
 
-			Assert.Equal(2245, database.GetItems().Count());
-			Assert.Equal(2203, filteredDatabase.GetItems().Count());
+			Assert.Equal(2559, database.GetItems().Count());
+			Assert.Equal(2503, filteredDatabase.GetItems().Count());
 
 			Assert.NotNull(database.GetItem("5939a00786f7742fe8132936"));
 			Assert.Null(filteredDatabase.GetItem("5939a00786f7742fe8132936"));
@@ -177,9 +199,11 @@ namespace RatStashTest
 			return costs[^1];
 		}
 
-		private Database GetDatabase(bool cleaned = true)
+		private Database GetDatabase(string locale = "en", bool cleaned = false)
 		{
-			return Database.FromFile(Combine(BasePath, "TestData\\items.json"), cleaned);
+			var itemsPath = Combine(BasePath, "TestData\\items.json");
+			var localePath = Combine(BasePath, $"TestData\\locales\\{locale}.json");
+			return Database.FromFile(itemsPath, cleaned, localePath);
 		}
 
 		private Dictionary<int, (Item item, ItemExtraInfo itemExtraInfo)> GetCacheIndex(Database database)

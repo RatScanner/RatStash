@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Force.DeepCloner;
 using Newtonsoft.Json.Linq;
 
@@ -24,31 +23,38 @@ namespace RatStash
 		/// <summary>
 		/// Create a new database object
 		/// </summary>
-		/// <param name="json">Item data as json string</param>
+		/// <param name="items">Item data as json string</param>
 		/// /// <param name="cleanStrings">Replace cyrillic characters with similar looking latin characters</param>
-		public static Database FromString(string json, bool cleanStrings = true)
+		/// <param name="locale">Localization data as json string</param>
+		public static Database FromString(string items, bool cleanStrings, string locale = null)
 		{
-			if (cleanStrings) json = CleanString(json);
+			if (cleanStrings) items = CleanString(items);
 
 			var db = new Database();
-			db.Load(json);
+			db.Load(items);
+			if(locale != null) db.LoadLocale(locale);
 			return db;
 		}
 
 		/// <summary>
 		/// Create a new database object
 		/// </summary>
-		/// <param name="filepath">Path to the file, containing the item data</param>
+		/// <param name="itemPath">Path to the file, containing the item data</param>
 		/// <param name="cleanStrings">Replace cyrillic characters with similar looking latin characters</param>
-		public static Database FromFile(string filepath, bool cleanStrings = true)
+		/// <param name="localePath">Path to the file, containing the localization data</param>
+		public static Database FromFile(string itemPath, bool cleanStrings, string localePath = null)
 		{
-			string json;
-			{
-				using var fileStream = File.Open(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-				using var textReader = new StreamReader(fileStream);
-				json = textReader.ReadToEnd();
-			}
-			return FromString(json, cleanStrings);
+			using var itemFileStream = File.Open(itemPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+			using var itemTextReader = new StreamReader(itemFileStream);
+			var items = itemTextReader.ReadToEnd();
+
+			if(localePath == null) return FromString(items, cleanStrings);
+
+			using var localeFileStream = File.Open(localePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+			using var localeTextReader = new StreamReader(localeFileStream);
+			var locale = localeTextReader.ReadToEnd();
+
+			return FromString(items, cleanStrings, locale);
 		}
 
 		/// <summary>
@@ -110,6 +116,27 @@ namespace RatStash
 					throw;
 #endif
 				}
+			}
+		}
+
+		/// <summary>
+		/// Load the locale data from a file and insert it into the current loaded database
+		/// </summary>
+		/// <param name="json">Locale data as json string</param>
+		private void LoadLocale(string json)
+		{
+			var jObj = JObject.Parse(json);
+			var templates = jObj["templates"].Children();
+
+			foreach (var template in templates)
+			{
+				var itemId = ((JProperty)template).Name;
+
+				if (!_items.ContainsKey(itemId)) continue;
+
+				_items[itemId].Name = (string)template.First["Name"];
+				_items[itemId].ShortName = (string)template.First["ShortName"];
+				_items[itemId].Description = (string)template.First["Description"];
 			}
 		}
 
