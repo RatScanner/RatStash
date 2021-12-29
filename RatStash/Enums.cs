@@ -9,7 +9,14 @@ namespace RatStash
 		Laboratory,
 		RezervBase,
 		Shoreline,
-		Woods
+		Woods,
+		Lighthouse,
+
+		[EnumMember(Value = "factory4_day")]
+		FactoryDay,
+
+		[EnumMember(Value = "factory4_night")]
+		FactoryNight
 	}
 
 	public enum AmmoType
