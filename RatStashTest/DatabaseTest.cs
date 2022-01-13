@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DeepEqual.Syntax;
@@ -33,6 +34,17 @@ namespace RatStashTest
 			var item = database.GetItem("59e7635f86f7742cbf2c1095");
 			Assert.Equal("Бронежилет БНТИ \"Модуль-3М\"", item.Name);
 			Assert.Equal(22813, item.CreditsPrice);
+		}
+
+		[Fact]
+		public void LoadAllLocalizedDatabases()
+		{
+			foreach (var locale in Enum.GetValues<Language>())
+			{
+				var database = GetDatabase(locale.ToBSGCode());
+				var item = database.GetItem("59e7635f86f7742cbf2c1095");
+				Assert.False(item.Name == "Module 3M");
+			}
 		}
 
 		[Fact]
