@@ -28,7 +28,7 @@ namespace RatStash
 		/// <param name="locale">Localization data as json string</param>
 		public static Database FromString(string items, bool cleanStrings, string locale = null)
 		{
-			if (cleanStrings) items = items.CryillicToLatin();
+			if (cleanStrings) items = items.CyrillicToLatin();
 
 			var db = new Database();
 			db.Load(items);

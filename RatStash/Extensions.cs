@@ -6,7 +6,10 @@ using System.Runtime.CompilerServices;
 
 namespace RatStash
 {
-	internal static class Extensions
+	/// <summary>
+	/// Extension methods used by RatStash for various types
+	/// </summary>
+	public static class Extensions
 	{
 		/// <summary>
 		/// Split a string into left and right part
@@ -46,7 +49,7 @@ namespace RatStash
 		/// <param name="str">The string which contains cyrillic characters</param>
 		/// <returns>The string with replace characters</returns>
 		/// <remarks>АВЕЅZІКМНОРСТХ -> ABESZIKMHOPCTX</remarks>
-		public static string CryillicToLatin(this string str)
+		public static string CyrillicToLatin(this string str)
 		{
 			const string cyrillicChars = "АВЕЅZІКМНОРСТХ"; //ШѴУ
 			const string latinChars = "ABESZIKMHOPCTX"; //WVY
