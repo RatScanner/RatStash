@@ -39,5 +39,24 @@ namespace RatStash
 		{
 			return new(str.ToCharArray().Reverse().ToArray());
 		}
+
+		/// <summary>
+		/// Replace cyrillic characters with similar looking latin characters
+		/// </summary>
+		/// <param name="str">The string which contains cyrillic characters</param>
+		/// <returns>The string with replace characters</returns>
+		/// <remarks>АВЕЅZІКМНОРСТХ -> ABESZIKMHOPCTX</remarks>
+		public static string CryillicToLatin(this string str)
+		{
+			const string cyrillicChars = "АВЕЅZІКМНОРСТХ"; //ШѴУ
+			const string latinChars = "ABESZIKMHOPCTX"; //WVY
+
+			for (var i = 0; i < cyrillicChars.Length; i++)
+			{
+				str = str.Replace(cyrillicChars[i], latinChars[i]);
+			}
+
+			return str;
+		}
 	}
 }
