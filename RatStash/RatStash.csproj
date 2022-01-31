@@ -5,7 +5,7 @@
 		<LangVersion>latest</LangVersion>
 		<Company>RatScanner</Company>
 		<Authors>Blightbuster</Authors>
-		<Version>1.5.3</Version>
+		<Version>1.6.0</Version>
 		<Description>Library for parsing and using item data from Escape from Tarkov</Description>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageProjectUrl>https://ratscanner.com/</PackageProjectUrl>
