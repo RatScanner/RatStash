@@ -4,12 +4,30 @@ using Xunit;
 
 namespace RatStashTest
 {
-	public class ItemTest
+	public class ItemTest : TestEnvironment
 	{
+		[Fact]
+		public void SizeComputation()
+		{
+			var database = GetDatabase();
+			var item = database.GetItem("5c07c60e0db834002330051f");
+			Assert.Equal((1, 1), item.GetSlotSize());
+
+			if (item is AssaultRifle rifle)
+			{
+				var grip = database.GetItem("5c0e2ff6d174af02a1659d4a");
+				rifle.Slots[0].ContainedItem = grip;
+
+				var stock = database.GetItem("5a33ca0fc4a282000d72292f");
+				rifle.Slots[3].ContainedItem = stock;
+				Assert.Equal((2, 2), rifle.GetSlotSize());
+			}
+			else Assert.False(true);
+		}
+
 		[Fact]
 		public void ValueEquals()
 		{
-
 			var item1 = new Weapon()
 			{
 				Id = "5c07c60e0db834002330051f",

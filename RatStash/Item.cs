@@ -152,6 +152,46 @@ namespace RatStash
 		[JsonProperty("DiscardingBlock")]
 		public bool DiscardingBlock { get; set; }
 
+		/// <summary>
+		/// Recursively compute the slot size of the item
+		/// </summary>
+		/// <returns>Slot size of the item</returns>
+		/// <remarks>Ignores reduced size of folded stocks</remarks>
+		public (int width, int height) GetSlotSize()
+		{
+			var recursiveExtraSize = GetExtraSizeRecursive(new ExtraSize());
+			return recursiveExtraSize.Apply(Width, Height);
+		}
+
+		private ExtraSize GetExtraSizeRecursive(ExtraSize extraSize)
+		{
+			if (this is CompoundItem compoundItem)
+			{
+				var slots = compoundItem.Slots;
+				foreach (var slot in slots)
+				{
+					if (slot.ContainedItem == null) continue;
+					var subExtraSize = slot.ContainedItem.GetExtraSizeRecursive(extraSize);
+					extraSize = ExtraSize.Merge(extraSize, subExtraSize);
+				}
+			}
+
+			return ExtraSize.Merge(ExtraSize, extraSize);
+		}
+
+		public ExtraSize ExtraSize =>
+			new ExtraSize()
+			{
+				Left = ExtraSizeForceAdd ? 0 : ExtraSizeLeft,
+				Right = ExtraSizeForceAdd ? 0 : ExtraSizeRight,
+				Up = ExtraSizeForceAdd ? 0 : ExtraSizeUp,
+				Down = ExtraSizeForceAdd ? 0 : ExtraSizeDown,
+				ForcedLeft = ExtraSizeForceAdd ? ExtraSizeLeft : 0,
+				ForcedRight = ExtraSizeForceAdd ? ExtraSizeRight : 0,
+				ForcedUp = ExtraSizeForceAdd ? ExtraSizeUp : 0,
+				ForcedDown = ExtraSizeForceAdd ? ExtraSizeDown : 0,
+			};
+
 		public override bool Equals(object obj)
 		{
 			if ((obj == null) || GetType() != obj.GetType()) return false;
