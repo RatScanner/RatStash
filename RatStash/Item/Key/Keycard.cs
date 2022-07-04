@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class Keycard : Key { }
-}
+namespace RatStash;
+
+public class Keycard : Key { }

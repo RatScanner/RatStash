@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class GearMod : WeaponMod { }
-}
+namespace RatStash;
+
+public class GearMod : WeaponMod { }

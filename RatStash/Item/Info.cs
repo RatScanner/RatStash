@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class Info : Item { }
-}
+namespace RatStash;
+
+public class Info : Item { }

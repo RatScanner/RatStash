@@ -1,4 +1,3 @@
-﻿namespace RatStash
-{
-	public class Collimator : Sights { }
-}
+﻿namespace RatStash;
+
+public class Collimator : Sights { }

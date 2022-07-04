@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class GasBlock : FunctionalMod { }
-}
+namespace RatStash;
+
+public class GasBlock : FunctionalMod { }

@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class Foregrip : FunctionalMod { }
-}
+namespace RatStash;
+
+public class Foregrip : FunctionalMod { }

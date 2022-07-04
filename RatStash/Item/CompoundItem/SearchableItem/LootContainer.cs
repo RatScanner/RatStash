@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 
-namespace RatStash
-{
-	using Newtonsoft.Json;
+namespace RatStash;
 
-	public class LootContainer : SearchableItem
-	{
-		[JsonProperty("SpawnFilter")]
-		public List<object> SpawnFilter { get; set; } = new();
-	}
+using Newtonsoft.Json;
+
+public class LootContainer : SearchableItem
+{
+	[JsonProperty("SpawnFilter")]
+	public List<object> SpawnFilter { get; set; } = new();
 }

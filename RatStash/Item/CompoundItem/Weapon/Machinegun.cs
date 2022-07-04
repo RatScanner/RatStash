@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class Machinegun : Weapon { }
-}
+namespace RatStash;
+
+public class Machinegun : Weapon { }

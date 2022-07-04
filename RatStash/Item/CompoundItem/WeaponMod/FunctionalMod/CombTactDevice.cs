@@ -1,10 +1,9 @@
 using Newtonsoft.Json;
 
-namespace RatStash
+namespace RatStash;
+
+public class CombTactDevice : FunctionalMod
 {
-	public class CombTactDevice : FunctionalMod
-	{
-		[JsonProperty("ModesCount")]
-		public int ModesCount { get; set; }
-	}
+	[JsonProperty("ModesCount")]
+	public int ModesCount { get; set; }
 }

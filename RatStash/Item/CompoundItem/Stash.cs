@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class Stash : CompoundItem { }
-}
+namespace RatStash;
+
+public class Stash : CompoundItem { }

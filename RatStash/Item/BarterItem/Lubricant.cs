@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class Lubricant : BarterItem { }
-}
+namespace RatStash;
+
+public class Lubricant : BarterItem { }

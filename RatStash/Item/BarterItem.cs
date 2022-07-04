@@ -1,13 +1,12 @@
-namespace RatStash
+namespace RatStash;
+
+using Newtonsoft.Json;
+
+public class BarterItem : Item
 {
-	using Newtonsoft.Json;
+	[JsonProperty("MaxResource")]
+	public int MaxResource { get; set; }
 
-	public class BarterItem : Item
-	{
-		[JsonProperty("MaxResource")]
-		public int MaxResource { get; set; }
-
-		[JsonProperty("Resource")]
-		public int Resource { get; set; }
-	}
+	[JsonProperty("Resource")]
+	public int Resource { get; set; }
 }

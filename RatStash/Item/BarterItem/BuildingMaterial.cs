@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class BuildingMaterial : BarterItem { }
-}
+namespace RatStash;
+
+public class BuildingMaterial : BarterItem { }

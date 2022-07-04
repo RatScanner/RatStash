@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class Compass : SpecialItem { }
-}
+namespace RatStash;
+
+public class Compass : SpecialItem { }

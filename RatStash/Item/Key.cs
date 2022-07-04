@@ -1,10 +1,9 @@
-namespace RatStash
-{
-	using Newtonsoft.Json;
+namespace RatStash;
 
-	public class Key : Item
-	{
-		[JsonProperty("MaximumNumberOfUsage")]
-		public int MaximumNumberOfUsage { get; set; }
-	}
+using Newtonsoft.Json;
+
+public class Key : Item
+{
+	[JsonProperty("MaximumNumberOfUsage")]
+	public int MaximumNumberOfUsage { get; set; }
 }

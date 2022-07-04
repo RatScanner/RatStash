@@ -1,13 +1,12 @@
-namespace RatStash
+namespace RatStash;
+
+using Newtonsoft.Json;
+
+public class Backpack : SearchableItem
 {
-	using Newtonsoft.Json;
+	[JsonProperty("GridLayoutName")]
+	public string GridLayoutName { get; set; }
 
-	public class Backpack : SearchableItem
-	{
-		[JsonProperty("GridLayoutName")]
-		public string GridLayoutName { get; set; }
-
-		[JsonProperty("speedPenaltyPercent")]
-		public int SpeedPenaltyPercent { get; set; }
-	}
+	[JsonProperty("speedPenaltyPercent")]
+	public int SpeedPenaltyPercent { get; set; }
 }

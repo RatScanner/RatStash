@@ -1,4 +1,3 @@
-﻿namespace RatStash
-{
-	public class AssaultScope : Sights { }
-}
+﻿namespace RatStash;
+
+public class AssaultScope : Sights { }

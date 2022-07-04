@@ -1,10 +1,9 @@
-namespace RatStash
-{
-	using Newtonsoft.Json;
+namespace RatStash;
 
-	public class Flashlight : FunctionalMod
-	{
-		[JsonProperty("ModesCount")]
-		public int ModesCount { get; set; }
-	}
+using Newtonsoft.Json;
+
+public class Flashlight : FunctionalMod
+{
+	[JsonProperty("ModesCount")]
+	public int ModesCount { get; set; }
 }

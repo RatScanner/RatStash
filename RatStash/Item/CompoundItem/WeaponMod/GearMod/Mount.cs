@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class Mount : GearMod { }
-}
+namespace RatStash;
+
+public class Mount : GearMod { }

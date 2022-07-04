@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class VisObservDevice : ArmoredEquipment { }
-}
+namespace RatStash;
+
+public class VisObservDevice : ArmoredEquipment { }

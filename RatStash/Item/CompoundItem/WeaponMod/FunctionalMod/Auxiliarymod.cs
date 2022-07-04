@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class AuxiliaryMod : FunctionalMod { }
-}
+namespace RatStash;
+
+public class AuxiliaryMod : FunctionalMod { }

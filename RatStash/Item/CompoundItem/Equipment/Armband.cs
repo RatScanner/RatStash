@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class ArmBand : Equipment { }
-}
+namespace RatStash;
+
+public class ArmBand : Equipment { }

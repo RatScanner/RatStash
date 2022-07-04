@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class Armor : ArmoredEquipment { }
-}
+namespace RatStash;
+
+public class Armor : ArmoredEquipment { }

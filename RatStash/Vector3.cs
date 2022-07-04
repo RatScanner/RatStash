@@ -1,16 +1,15 @@
 ﻿using Newtonsoft.Json;
 
-namespace RatStash
+namespace RatStash;
+
+public class Vector3
 {
-	public class Vector3
-	{
-		[JsonProperty("x")]
-		public float X { get; set; }
+	[JsonProperty("x")]
+	public float X { get; set; }
 
-		[JsonProperty("y")]
-		public float Y { get; set; }
+	[JsonProperty("y")]
+	public float Y { get; set; }
 
-		[JsonProperty("z")]
-		public float Z { get; set; }
-	}
+	[JsonProperty("z")]
+	public float Z { get; set; }
 }

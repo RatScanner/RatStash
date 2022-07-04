@@ -1,10 +1,9 @@
-namespace RatStash
-{
-	using Newtonsoft.Json;
+namespace RatStash;
 
-	public class Shotgun : Weapon
-	{
-		[JsonProperty("ShotgunDispersion")]
-		public float ShotgunDispersion { get; set; }
-	}
+using Newtonsoft.Json;
+
+public class Shotgun : Weapon
+{
+	[JsonProperty("ShotgunDispersion")]
+	public float ShotgunDispersion { get; set; }
 }

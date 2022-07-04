@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class Stimulator : Meds { }
-}
+namespace RatStash;
+
+public class Stimulator : Meds { }

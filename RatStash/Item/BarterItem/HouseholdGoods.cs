@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class HouseholdGoods : BarterItem { }
-}
+namespace RatStash;
+
+public class HouseholdGoods : BarterItem { }

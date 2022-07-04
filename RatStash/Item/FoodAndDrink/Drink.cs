@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class Drink : FoodAndDrink { }
-}
+namespace RatStash;
+
+public class Drink : FoodAndDrink { }

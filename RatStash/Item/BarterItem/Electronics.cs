@@ -1,6 +1,5 @@
-namespace RatStash
-{
-	using Newtonsoft.Json;
+namespace RatStash;
 
-	public class Electronics : BarterItem { }
-}
+using Newtonsoft.Json;
+
+public class Electronics : BarterItem { }

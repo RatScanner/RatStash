@@ -1,4 +1,3 @@
-﻿namespace RatStash
-{
-	public class SpecialScope : Sights { }
-}
+﻿namespace RatStash;
+
+public class SpecialScope : Sights { }

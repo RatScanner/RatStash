@@ -1,4 +1,3 @@
-namespace RatStash
-{
-	public class RailCovers : FunctionalMod { }
-}
+namespace RatStash;
+
+public class RailCovers : FunctionalMod { }
