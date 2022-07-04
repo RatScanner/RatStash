@@ -24,10 +24,11 @@ jobs:
       - name: Test
         run: dotnet test
       - name: Publish to NuGet
-        uses: brandedoutcast/publish-nuget@v2
+        uses: alirezanet/publish-nuget@v3.0.4
         with:
           PROJECT_FILE_PATH: RatStash/RatStash.csproj
           TAG_COMMIT: true
           TAG_FORMAT: v*
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          #NCLUDE_SYMBOLS: true
+          NUGET_SOURCE: https://api.nuget.org
+          INCLUDE_SYMBOLS: true
