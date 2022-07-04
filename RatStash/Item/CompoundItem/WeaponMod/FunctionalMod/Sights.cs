@@ -3,8 +3,6 @@ using Newtonsoft.Json.Converters;
 
 namespace RatStash;
 
-using Newtonsoft.Json;
-
 public class Sights : FunctionalMod
 {
 	[JsonProperty("AimSensitivity")]

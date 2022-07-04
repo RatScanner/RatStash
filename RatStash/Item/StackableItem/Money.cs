@@ -2,8 +2,6 @@ using Newtonsoft.Json.Converters;
 
 namespace RatStash;
 
-using Newtonsoft.Json;
-
 public class Money : StackableItem
 {
 	[JsonProperty("eqMax")]

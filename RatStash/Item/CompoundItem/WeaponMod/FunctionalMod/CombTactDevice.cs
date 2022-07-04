@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-
 namespace RatStash;
 
 public class CombTactDevice : FunctionalMod

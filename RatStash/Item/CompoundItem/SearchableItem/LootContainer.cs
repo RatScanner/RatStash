@@ -2,8 +2,6 @@ using System.Collections.Generic;
 
 namespace RatStash;
 
-using Newtonsoft.Json;
-
 public class LootContainer : SearchableItem
 {
 	[JsonProperty("SpawnFilter")]

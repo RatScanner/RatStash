@@ -4,8 +4,6 @@ using Newtonsoft.Json.Converters;
 
 namespace RatStash;
 
-using Newtonsoft.Json;
-
 public class Magazine : GearMod
 {
 	[JsonProperty("CanAdmin")]

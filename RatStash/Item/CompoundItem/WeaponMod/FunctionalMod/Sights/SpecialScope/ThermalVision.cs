@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace RatStash;
+﻿namespace RatStash;
 
 public class ThermalVision : SpecialScope
 {

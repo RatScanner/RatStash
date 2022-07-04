@@ -1,7 +1,5 @@
 namespace RatStash;
 
-using Newtonsoft.Json;
-
 public class WeaponMod : CompoundItem
 {
 	[JsonProperty("Accuracy")]
