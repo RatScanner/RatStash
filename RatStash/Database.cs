@@ -263,10 +263,10 @@ public class Database
 	/// <param name="ratingFunction">Function to rate a item</param>
 	/// <returns>The item with the highest rating</returns>
 	/// <remarks>Particularly useful in combination with editor distance algorithms to get items by name / short name</remarks>
-	public Item GetItem(Func<Item, int> ratingFunction)
+	public Item GetItem<T>(Func<Item, T> ratingFunction) where T: IComparable
 	{
 		var rf = ratingFunction;
-		return _items.Values.Aggregate((agg, next) => rf(next) > rf(agg) ? next : agg).DeepClone();
+		return _items.Values.Aggregate((agg, next) => rf(next).CompareTo(rf(agg)) > 0 ? next : agg).DeepClone();
 	}
 
 	/// <summary>
