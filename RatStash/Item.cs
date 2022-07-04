@@ -199,7 +199,7 @@ public class Item
 			{
 				var thisContainedItem = thisItem.Slots[i].ContainedItem;
 				var otherContainedItem = otherItem.Slots[i].ContainedItem;
-				if (!(thisContainedItem.Equals(otherContainedItem))) return false;
+				if (!thisContainedItem.Equals(otherContainedItem)) return false;
 			}
 		}
 
@@ -212,9 +212,11 @@ public class Item
 
 		if (this is CompoundItem compoundItem)
 		{
+			
 			foreach (var slot in compoundItem.Slots)
 			{
 				var item = slot.ContainedItem;
+				if (item == null) continue;
 				hashCode *= 29 + item.GetHashCode();
 			}
 		}
