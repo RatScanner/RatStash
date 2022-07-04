@@ -106,4 +106,17 @@ public class ItemTest : TestEnvironment
 		Assert.Equal(item, item);
 		Assert.True(item == item);
 	}
+
+	[Fact]
+	public void WeaponTest()
+	{
+		var database = GetDatabase();
+		var item = database.GetItem("5ac4cd105acfc40016339859");
+		Assert.NotEqual(item.GetHashCode(), 0);
+		Assert.False(item.Equals(null));
+		Assert.True(item.Equals(item));
+		Assert.NotEqual(item.GetSlotSize(), (0, 0));
+		Assert.NotNull(item.GetType());
+		Assert.NotNull(item.ToString());
+	}
 }

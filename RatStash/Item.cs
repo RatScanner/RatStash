@@ -199,6 +199,8 @@ public class Item
 			{
 				var thisContainedItem = thisItem.Slots[i].ContainedItem;
 				var otherContainedItem = otherItem.Slots[i].ContainedItem;
+				if (thisContainedItem == null && otherContainedItem == null) continue;
+				if (thisContainedItem == null || otherContainedItem == null) return false;
 				if (!thisContainedItem.Equals(otherContainedItem)) return false;
 			}
 		}
