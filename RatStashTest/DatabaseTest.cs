@@ -13,27 +13,27 @@ public class DatabaseTest : TestEnvironment
 	public void LoadEnglishDatabase()
 	{
 		var database = GetDatabase();
-		var item = database.GetItem("59e7635f86f7742cbf2c1095");
-		Assert.Equal("BNTI Module-3M body armor", item.Name);
-		Assert.Equal(22813, item.CreditsPrice);
+		var item = database.GetItem("5bc9b720d4351e450201234b");
+		Assert.Equal("Golden 1GPhone smartphone", item.Name);
+		Assert.Equal((1, 1), item.GetSlotSize());
 	}
 
 	[Fact]
 	public void LoadGermanDatabase()
 	{
 		var database = GetDatabase("ge");
-		var item = database.GetItem("59e7635f86f7742cbf2c1095");
-		Assert.Equal("Modulare Schutzweste von 3M", item.Name);
-		Assert.Equal(22813, item.CreditsPrice);
+		var item = database.GetItem("5bc9b720d4351e450201234b");
+		Assert.Equal("Goldenes 1GPhone", item.Name);
+		Assert.Equal((1, 1), item.GetSlotSize());
 	}
 
 	[Fact]
 	public void LoadRussianDatabase()
 	{
 		var database = GetDatabase("ru");
-		var item = database.GetItem("59e7635f86f7742cbf2c1095");
-		Assert.Equal("Бронежилет БНТИ \"Модуль-3М\"", item.Name);
-		Assert.Equal(22813, item.CreditsPrice);
+		var item = database.GetItem("5bc9b720d4351e450201234b");
+		Assert.Equal("Золотой смартфон 1GPhone", item.Name);
+		Assert.Equal((1, 1), item.GetSlotSize());
 	}
 
 	[Fact]
@@ -42,8 +42,8 @@ public class DatabaseTest : TestEnvironment
 		foreach (var locale in Enum.GetValues<Language>())
 		{
 			var database = GetDatabase(locale.ToBSGCode());
-			var item = database.GetItem("59e7635f86f7742cbf2c1095");
-			Assert.False(item.Name == "Module 3M");
+			var item = database.GetItem("5bc9b720d4351e450201234b");
+			Assert.False(item.Name == "");
 		}
 	}
 
@@ -77,16 +77,17 @@ public class DatabaseTest : TestEnvironment
 	public void QueryMaxItem()
 	{
 		var database = GetDatabase();
-		var mostValuableItem = database.GetItem(item => item.CreditsPrice);
-		Assert.Equal("Secure container Kappa", mostValuableItem.Name);
+		var mostHeavyItem = database.GetItem(item => item.Weight);
+		Assert.Equal(500, mostHeavyItem.Weight);
+		Assert.Equal("Airdrop supply crate", mostHeavyItem.Name);
 	}
 
 	[Fact]
 	public void QueryByName()
 	{
 		var database = GetDatabase();
-		var query = "A8H 12 p0Iymr";
-		var result = database.GetItem(item => LevenshteinDistance(item.Name, query) * -1);
+		var query = "A8h 12 p0Iymer";
+		var result = database.GetItem(item => NormedLevenshteinDistance(item.Name, query));
 		Assert.StartsWith("ASh-12 polymer handguard", result.Name);
 	}
 
@@ -95,7 +96,7 @@ public class DatabaseTest : TestEnvironment
 	{
 		var database = GetDatabase();
 		var items = database.GetItems().ToArray();
-		Assert.Equal(2559, items.Length);
+		Assert.Equal(2791, items.Length);
 		Assert.DoesNotContain(null, items);
 	}
 
@@ -126,8 +127,7 @@ public class DatabaseTest : TestEnvironment
 		var database = GetDatabase();
 		var filteredDatabase = GetDatabase().Filter(item => !item.QuestItem);
 
-		Assert.Equal(2559, database.GetItems().Count());
-		Assert.Equal(2503, filteredDatabase.GetItems().Count());
+		Assert.NotEqual(database.GetItems().Count(), filteredDatabase.GetItems().Count());
 
 		Assert.NotNull(database.GetItem("5939a00786f7742fe8132936"));
 		Assert.Null(filteredDatabase.GetItem("5939a00786f7742fe8132936"));

@@ -24,47 +24,45 @@ public class TestEnvironment
 		return System.IO.Path.Combine(basePath, x);
 	}
 
-	public static int LevenshteinDistance(string target, string value)
+	public static float NormedLevenshteinDistance(string source, string target)
 	{
-		if (target.Length > value.Length) target = target.Substring(0, value.Length);
-
-		if (target.Length == 0) return value.Length;
-		if (value.Length == 0) return target.Length;
-
-		var costs = new int[target.Length];
-
-		// Add indexing for insertion to first row
-		for (var i = 0; i < costs.Length;) costs[i] = ++i;
-
-		for (var i = 0; i < value.Length; i++)
+		if (string.IsNullOrEmpty(source))
 		{
-			// Cost of the first index
-			var cost = i;
-			var additionCost = i;
+			return string.IsNullOrEmpty(target) ? 0 : target.Length;
+		}
 
-			// Cache value for inner loop to avoid index lookup and bonds checking, profiled this is quicker
-			var value2Char = value[i];
+		if (string.IsNullOrEmpty(target)) return source.Length;
 
-			for (var j = 0; j < target.Length; j++)
+		if (source.Length > target.Length)
+		{
+			var temp = target;
+			target = source;
+			source = temp;
+		}
+
+		var m = target.Length;
+		var n = source.Length;
+		var distance = new int[2, m + 1];
+		// Initialize the distance matrix
+		for (var j = 1; j <= m; j++) distance[0, j] = j;
+
+		var currentRow = 0;
+		for (var i = 1; i <= n; ++i)
+		{
+			currentRow = i & 1;
+			distance[currentRow, 0] = i;
+			var previousRow = currentRow ^ 1;
+			for (var j = 1; j <= m; j++)
 			{
-				var insertionCost = cost;
-				cost = additionCost;
-
-				// Assigning this here reduces the array reads we do
-				additionCost = costs[j];
-
-				if (value2Char != target[j])
-				{
-					if (insertionCost < cost) cost = insertionCost;
-					if (additionCost < cost) cost = additionCost;
-					++cost;
-				}
-
-				costs[j] = cost;
+				var cost = (target[j - 1] == source[i - 1] ? 0 : 1);
+				distance[currentRow, j] = Math.Min(Math.Min(
+						distance[previousRow, j] + 1,
+						distance[currentRow, j - 1] + 1),
+					distance[previousRow, j - 1] + cost);
 			}
 		}
 
-		return costs[^1];
+		return (float)(target.Length - distance[currentRow, m]) / target.Length;
 	}
 
 	public Database GetDatabase(string locale = "en", bool cleaned = false)

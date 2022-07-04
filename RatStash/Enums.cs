@@ -122,7 +122,8 @@ public enum ReloadMode
 {
 	ExternalMagazine,
 	InternalMagazine,
-	OnlyBarrel
+	OnlyBarrel,
+	ExternalMagazineWithInternalReloadSupport
 }
 
 public enum SightModType
@@ -130,7 +131,8 @@ public enum SightModType
 	Hybrid,
 	Iron,
 	Optic,
-	Reflex
+	Reflex,
+	Holo
 }
 
 public enum Mask
@@ -175,6 +177,7 @@ public enum EquipmentSlot
 	Dogtag,
 	ArmBand,
 	Compass,
+	SpecialSlot
 }
 
 public enum FireMode : byte
@@ -182,7 +185,9 @@ public enum FireMode : byte
 	Fullauto = 0,
 	Single = 1,
 	Doublet = 2,
-	Burst = 3
+	Burst = 3,
+	Doubleaction = 4,
+	Semiauto = 5
 }
 
 public enum UseType

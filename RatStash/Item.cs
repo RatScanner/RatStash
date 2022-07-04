@@ -40,9 +40,6 @@ public class Item
 	[JsonProperty("SpawnChance")]
 	public float SpawnChance { get; set; }
 
-	[JsonProperty("CreditsPrice")]
-	public int CreditsPrice { get; set; }
-
 	[JsonProperty("ItemSound")]
 	public string ItemSound { get; set; }
 
