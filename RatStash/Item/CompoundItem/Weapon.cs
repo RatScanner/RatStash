@@ -45,7 +45,7 @@ public class Weapon : CompoundItem
 	public bool Foldable { get; set; }
 
 	[JsonProperty("FoldedSlot")]
-	public string FoldedSlot { get; set; }
+	public string FoldedSlot { get; set; } = "";
 
 	[JsonProperty("HipAccuracyRestorationDelay")]
 	public float HipAccuracyRestorationDelay { get; set; }
@@ -70,6 +70,12 @@ public class Weapon : CompoundItem
 
 	[JsonProperty("MinRepairDegradation")]
 	public float MinRepairDegradation { get; set; }
+
+	[JsonProperty("MinRepairKitDegradation")]
+	public float MinRepairKitDegradation { get; set; }
+
+	[JsonProperty("MaxRepairKitDegradation")]
+	public float MaxRepairKitDegradation { get; set; }
 
 	[JsonProperty("MustBoltBeOpennedForExternalReload")]
 	public bool MustBoltBeOpennedForExternalReload { get; set; }
@@ -127,13 +133,22 @@ public class Weapon : CompoundItem
 	public float Velocity { get; set; }
 
 	[JsonProperty("ammoCaliber")]
-	public string AmmoCaliber { get; set; }
+	public string AmmoCaliber { get; set; } = "";
+
+	[JsonProperty("AdjustCollimatorsToTrajectory")]
+	public bool AdjustCollimatorsToTrajectory { get; set; }
 
 	[JsonProperty("bEffDist")]
 	public int BEffectiveDistance { get; set; }
 
 	[JsonProperty("bFirerate")]
 	public int BFirerate { get; set; }
+
+	[JsonProperty("SingleFireRate")]
+	public int SingleFireRate { get; set; } = 240;
+
+	[JsonProperty("CanQueueSecondShot")]
+	public bool CanQueueSecondShot { get; set; } = true;
 
 	[JsonProperty("bHearDist")]
 	public int BHearDistance { get; set; }
@@ -142,10 +157,10 @@ public class Weapon : CompoundItem
 	public int ChamberAmmoCount { get; set; }
 
 	[JsonProperty("defAmmo")]
-	public string DefAmmo { get; set; }
+	public string DefAmmo { get; set; } = "";
 
 	[JsonProperty("defMagType")]
-	public string DefMagType { get; set; }
+	public string DefMagType { get; set; } = "";
 
 	[JsonProperty("durabSpawnMax")]
 	public int DurabilitySpawnMax { get; set; }
@@ -166,7 +181,61 @@ public class Weapon : CompoundItem
 	public int ShotgunDispersionInt { get; set; }
 
 	[JsonProperty("weapClass")]
-	public string WeaponClass { get; set; }
+	public string WeaponClass { get; set; } = "";
+
+	[JsonProperty("AimSensitivity")]
+	public float AimSensitivity { get; set; } = 1f;
+
+	[JsonProperty("BurstShotsCount")]
+	public int BurstShotsCount { get; set; } = 3;
+
+	[JsonProperty("BaseMalfunctionChance")]
+	public float BaseMalfunctionChance { get; set; }
+
+	[JsonProperty("AllowJam")]
+	public bool AllowJam { get; set; }
+
+	[JsonProperty("AllowFeed")]
+	public bool AllowFeed { get; set; }
+
+	[JsonProperty("AllowMisfire")]
+	public bool AllowMisfire { get; set; }
+
+	[JsonProperty("AllowSlide")]
+	public bool AllowSlide { get; set; }
+
+	[JsonProperty("DurabilityBurnRatio")]
+	public float DurabilityBurnRatio { get; set; } = 1f;
+
+	[JsonProperty("HeatFactorGun")]
+	public float HeatFactorGun { get; set; }
+
+	[JsonProperty("CoolFactorGun")]
+	public float CoolFactorGun { get; set; }
+
+	[JsonProperty("AllowOverheat")]
+	public bool AllowOverheat { get; set; }
+
+	[JsonProperty("HeatFactorByShot")]
+	public float HeatFactorByShot { get; set; } = 1f;
+
+	[JsonProperty("CoolFactorGunMods")]
+	public float CoolFactorGunMods { get; set; } = 1f;
+
+	[JsonProperty("RecoilPosZMult")]
+	public float RecoilPosZMult { get; set; } = 1f;
+
+	[JsonProperty("IsFlareGun")]
+	public bool IsFlareGun { get; set; }
+
+	[JsonProperty("IsOneoff")]
+	public bool IsOneoff { get; set; }
+
+	[JsonProperty("IsGrenadeLauncher")]
+	public bool IsGrenadeLauncher { get; set; }
+
+	[JsonProperty("DoubleActionAccuracyPenalty")]
+	public float DoubleActionAccuracyPenalty { get; set; }
 
 	[JsonProperty("weapFireType", ItemConverterType = typeof(StringEnumConverter))]
 	public List<FireMode> WeaponFireType { get; set; } = new();

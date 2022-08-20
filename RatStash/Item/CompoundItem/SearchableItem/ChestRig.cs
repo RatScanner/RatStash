@@ -19,7 +19,7 @@ public class ChestRig : SearchableItem
 	public int MaxDurability { get; set; }
 
 	[JsonProperty("RigLayoutName")]
-	public string RigLayoutName { get; set; }
+	public string RigLayoutName { get; set; } = "";
 
 	[JsonProperty("armorClass")]
 	public int ArmorClass { get; set; }

@@ -3,14 +3,8 @@
 namespace RatStash;
 
 [JsonConverter(typeof(JsonPathConverter))]
-public class Slot : IContainer
+public class Slot : RawItem<object>, IContainer
 {
-	[JsonProperty("_name")]
-	public string Name { get; set; }
-
-	[JsonProperty("_id")]
-	public string Id { get; set; }
-
 	[JsonProperty("_props.filters")]
 	public List<ItemFilter> Filters { get; set; } = new();
 

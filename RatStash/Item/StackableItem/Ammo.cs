@@ -20,7 +20,7 @@ public class Ammo : StackableItem
 	public ArmorDistanceDistanceDamage Blindness { get; set; }
 
 	[JsonProperty("Caliber")]
-	public string Caliber { get; set; }
+	public string Caliber { get; set; } = "";
 
 	[JsonProperty("Contusion")]
 	public ArmorDistanceDistanceDamage Contusion { get; set; }
@@ -39,7 +39,7 @@ public class Ammo : StackableItem
 	public ExplosionType ExplosionType { get; set; }
 
 	[JsonProperty("FragmentType")]
-	public string FragmentType { get; set; }
+	public string FragmentType { get; set; } = "";
 
 	[JsonProperty("FragmentationChance")]
 	public int FragmentationChance { get; set; }
@@ -133,7 +133,7 @@ public class Ammo : StackableItem
 	public int AmmoRec { get; set; }
 
 	[JsonProperty("ammoSfx")]
-	public string AmmoSfx { get; set; }
+	public string AmmoSfx { get; set; } = "";
 
 	[JsonProperty("ammoShiftChance")]
 	public int AmmoShiftChance { get; set; }
@@ -152,10 +152,35 @@ public class Ammo : StackableItem
 	public int CasingMass { get; set; }
 
 	[JsonProperty("casingName")]
-	public string CasingName { get; set; }
+	public string CasingName { get; set; } = "";
 
 	[JsonProperty("casingSounds")]
-	public string CasingSounds { get; set; }
+	public string CasingSounds { get; set; } = "";
+
+	[JsonProperty("BulletMassGram")]
+	public float BulletMass { get; set; }
+
+	[JsonProperty("BulletDiameterMilimeters")]
+	public float BulletDiameterMillimeters { get; set; }
+
+	[JsonProperty("PenetrationPower")]
+	public int PenetrationPower { get; set; } = 40;
+
+	[JsonProperty("Tracer")]
+	public bool Tracer { get; set; }
+
+	[JsonProperty("MalfMisfireChance")]
+	public float MalfunctionMisfireChance { get; set; }
+
+	[JsonProperty("MalfFeedChance")]
+	public float MalfunctionFeedChance { get; set; }
+
+	[JsonProperty("DurabilityBurnModificator")]
+	public float DurabilityBurnModifier { get; set; } = 1f;
+
+	[JsonProperty("HeatFactor")]
+	public float HeatFactor { get; set; } = 1f;
+
 }
 
 public class ArmorDistanceDistanceDamage

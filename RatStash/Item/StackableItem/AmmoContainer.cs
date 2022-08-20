@@ -8,5 +8,5 @@ public class AmmoContainer : StackableItem
 	public List<StackSlot> StackSlots { get; set; } = new();
 
 	[JsonProperty("ammoCaliber")]
-	public string AmmoCaliber { get; set; }
+	public string AmmoCaliber { get; set; } = "";
 }

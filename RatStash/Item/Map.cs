@@ -3,7 +3,7 @@ namespace RatStash;
 public class Map : Item
 {
 	[JsonProperty("ConfigPathStr")]
-	public string ConfigPathStr { get; set; }
+	public string ConfigPathStr { get; set; } = "";
 
 	[JsonProperty("MaxMarkersCount")]
 	public int MaxMarkersCount { get; set; }

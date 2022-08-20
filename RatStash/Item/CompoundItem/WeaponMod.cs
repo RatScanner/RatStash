@@ -5,6 +5,9 @@ public class WeaponMod : CompoundItem
 	[JsonProperty("Accuracy")]
 	public int Accuracy { get; set; }
 
+	[JsonProperty("DoubleActionAccuracyPenaltyMult")]	
+	public float DoubleActionAccuracyPenaltyMultiplier { get; set; }
+
 	[JsonProperty("BlocksCollapsible")]
 	public bool BlocksCollapsible { get; set; }
 
@@ -43,4 +46,13 @@ public class WeaponMod : CompoundItem
 
 	[JsonProperty("Velocity")]
 	public float Velocity { get; set; }
+
+	[JsonProperty("DurabilityBurnModificator")]
+	public float DurabilityBurnModificator { get; set; } = 1f;
+
+	[JsonProperty("HeatFactor")]
+	public float HeatFactor { get; set; } = 1f;
+
+	[JsonProperty("CoolFactor")]
+	public float CoolFactor { get; set; } = 1f;
 }

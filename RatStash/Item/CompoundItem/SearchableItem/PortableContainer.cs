@@ -34,5 +34,5 @@ public class PortableContainer : SearchableItem
 	public Rarity SpawnRarity { get; set; }
 
 	[JsonProperty("spawnTypes")]
-	public string SpawnTypes { get; set; }
+	public string SpawnTypes { get; set; } = "";
 }

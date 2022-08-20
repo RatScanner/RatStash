@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Dynamic;
 using Newtonsoft.Json.Converters;
 
 namespace RatStash;
@@ -32,10 +31,19 @@ public class Magazine : GearMod
 	public ReloadMode ReloadMagType { get; set; }
 
 	[JsonProperty("VisibleAmmoRangesString")]
-	public string VisibleAmmoRangesString { get; set; }
+	public string VisibleAmmoRangesString { get; set; } = "";
 
 	[JsonProperty("magAnimationIndex")]
 	public int MagAnimationIndex { get; set; }
+
+	[JsonProperty("MalfunctionChance")]
+	public float MalfunctionChance { get; set; }
+
+	[JsonProperty("TagColor")]
+	public int TagColor { get; set; }
+
+	[JsonProperty("TagName")]
+	public string TagName { get; set; } = "";
 
 	/// <summary>
 	/// Maximum visible ammunition

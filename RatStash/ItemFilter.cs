@@ -9,4 +9,13 @@ public class ItemFilter
 
 	[JsonProperty("ExcludedFilter")]
 	public List<string> Blacklist { get; set; } = new();
+
+	[JsonProperty("Shift")]
+	public int Shift { get; set; }
+
+	[JsonProperty("MaxStackCount")]
+	public int MaxStackCount { get; set; }
+
+	[JsonProperty("AnimationIndex")]
+	public int AnimationIndex { get; set; }
 }

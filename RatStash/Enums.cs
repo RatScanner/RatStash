@@ -118,6 +118,14 @@ public enum Rarity
 	Superrare
 }
 
+public enum ItemDropSoundType
+{
+	None,
+	Pistol,
+	SubMachineGun,
+	Rifle
+}
+
 public enum ReloadMode
 {
 	ExternalMagazine,

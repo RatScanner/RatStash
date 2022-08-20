@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using DeepEqual.Syntax;
 using RatStash;
@@ -66,7 +66,11 @@ public class DatabaseTest : TestEnvironment
 	public void QueryItemByDiscriminator()
 	{
 		var database = GetDatabase();
-		var items = database.GetItems(item => item.ShortName == "MRE").ToArray();
+		var items = database.GetItems(item =>
+		{
+			File.AppendAllText("test.txt", $"{item.Id} -> {item.ShortName}\n");
+			return item.ShortName == "MRE";
+		}).ToArray();
 		Assert.True(items.Any());
 		var expected = database.GetItem("590c5f0d86f77413997acfab");
 		var actual = items.First();

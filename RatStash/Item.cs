@@ -5,16 +5,16 @@ namespace RatStash;
 
 public class Item
 {
-	public string Id { get; set; }
+	public string Id { get; set; } = "";
 
 	[JsonProperty("Name")]
-	public string Name { get; set; }
+	public string Name { get; set; } = "";
 
 	[JsonProperty("ShortName")]
-	public string ShortName { get; set; }
+	public string ShortName { get; set; } = "";
 
 	[JsonProperty("Description")]
-	public string Description { get; set; }
+	public string Description { get; set; } = "";
 
 	[JsonProperty("Weight")]
 	public float Weight { get; set; }
@@ -36,11 +36,15 @@ public class Item
 	[JsonConverter(typeof(StringEnumConverter))]
 	public Rarity Rarity { get; set; }
 
+	[JsonProperty("DropSoundType")]
+	[JsonConverter(typeof(StringEnumConverter))]
+	public ItemDropSoundType DropSoundType { get; set; }
+
 	[JsonProperty("SpawnChance")]
 	public float SpawnChance { get; set; }
 
 	[JsonProperty("ItemSound")]
-	public string ItemSound { get; set; }
+	public string ItemSound { get; set; } = "";
 
 	[JsonProperty("Prefab")]
 	public Prefab Prefab { get; set; }
@@ -148,6 +152,15 @@ public class Item
 	[JsonProperty("DiscardingBlock")]
 	public bool DiscardingBlock { get; set; }
 
+	[JsonProperty("RagFairCommissionModifier")]
+	public float RagFairCommissionModifier { get; set; } = 1f;
+
+	[JsonProperty("IsAlwaysAvailableForInsurance")]
+	public bool IsAlwaysAvailableForInsurance { get; set; }
+
+	[JsonProperty("DiscardLimit")]
+	public int DiscardLimit { get; set; } = -1;
+
 	/// <summary>
 	/// Recursively compute the slot size of the item
 	/// </summary>
@@ -214,7 +227,7 @@ public class Item
 
 		if (this is CompoundItem compoundItem)
 		{
-			
+
 			foreach (var slot in compoundItem.Slots)
 			{
 				var item = slot.ContainedItem;

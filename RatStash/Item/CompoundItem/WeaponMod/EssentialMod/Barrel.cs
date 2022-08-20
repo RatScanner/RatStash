@@ -10,4 +10,10 @@ public class Barrel : EssentialMod
 
 	[JsonProperty("ShotgunDispersion")]
 	public float ShotgunDispersion { get; set; }
+
+	[JsonProperty("DeviationMax")]
+	public float DeviationMax { get; set; }
+
+	[JsonProperty("DeviationCurve")]
+	public float DeviationCurve { get; set; }
 }

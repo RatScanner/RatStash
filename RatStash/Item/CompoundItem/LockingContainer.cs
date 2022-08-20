@@ -11,5 +11,5 @@ public class LockingContainer : CompoundItem
 	public int TagColor { get; set; }
 
 	[JsonProperty("TagName")]
-	public string TagName { get; set; }
+	public string TagName { get; set; } = "";
 }

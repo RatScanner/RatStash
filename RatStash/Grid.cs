@@ -19,6 +19,9 @@ public class Grid
 	[JsonProperty("maxWeight")]
 	public int MaxWeight { get; set; }
 
+	[JsonProperty("isSortingTable")]
+	public bool IsSortingTable { get; set; }
+
 	[JsonProperty("filters")]
 	public List<ItemFilter> Filters { get; set; } = new();
 }

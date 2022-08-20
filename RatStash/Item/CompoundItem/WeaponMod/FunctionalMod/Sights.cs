@@ -11,6 +11,9 @@ public class Sights : FunctionalMod
 	[JsonProperty("CalibrationDistances")]
 	public List<List<int>> CalibrationDistances { get; set; } = new();
 
+	[JsonProperty("CustomAimPlane")]
+	public string CustomAimPlane { get; set; } = "";
+
 	[JsonProperty("ModesCount")]
 	public List<int> ModesCount { get; set; } = new();
 

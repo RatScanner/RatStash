@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Force.DeepCloner;
 using Newtonsoft.Json.Linq;
 
@@ -63,6 +65,14 @@ public class Database
 	/// <param name="json">Item data as json string</param>
 	private void Load(string json)
 	{
+		var settings = new JsonSerializerSettings
+		{
+#if DEBUG
+			MissingMemberHandling = MissingMemberHandling.Error,
+#endif
+		};
+		var serializer = JsonSerializer.Create(settings);
+
 		var jObj = JObject.Parse(json);
 		var items = jObj.Children();
 
@@ -86,7 +96,7 @@ public class Database
 			var id = (string)itemInfo["_id"];
 			try
 			{
-				var parsedItem = (Item)itemInfo["_props"].ToObject(parent);
+				var parsedItem = (Item)itemInfo["_props"].ToObject(parent, serializer);
 				if (parsedItem == null) continue;
 				parsedItem.Id = id;
 				_items.Add(id, parsedItem);
@@ -126,108 +136,118 @@ public class Database
 	{
 		return name switch
 		{
-			"Item" => typeof(Item),
-			"Fuel" => typeof(Fuel),
-			"HouseholdGoods" => typeof(HouseholdGoods),
-			"Jewelry" => typeof(Jewelry),
-			"Battery" => typeof(Battery),
-			"Electronics" => typeof(Electronics),
-			"Tool" => typeof(Tool),
-			"MedicalSupplies" => typeof(MedicalSupplies),
-			"Lubricant" => typeof(Lubricant),
-			"BuildingMaterial" => typeof(BuildingMaterial),
-			"Other" => typeof(Other),
+			nameof(Item) => typeof(Item),
+			nameof(Fuel) => typeof(Fuel),
+			nameof(HouseholdGoods) => typeof(HouseholdGoods),
+			nameof(Jewelry) => typeof(Jewelry),
+			nameof(Battery) => typeof(Battery),
+			nameof(Electronics) => typeof(Electronics),
+			nameof(Tool) => typeof(Tool),
+			nameof(MedicalSupplies) => typeof(MedicalSupplies),
+			nameof(Lubricant) => typeof(Lubricant),
+			nameof(BuildingMaterial) => typeof(BuildingMaterial),
+			nameof(Other) => typeof(Other),
 			"FlashHider" => typeof(Flashhider),
-			"Silencer" => typeof(Silencer),
-			"Pms" => typeof(Pms),
-			"Compensator" => typeof(Compensator),
+			nameof(Silencer) => typeof(Silencer),
+			nameof(Pms) => typeof(Pms),
+			nameof(Compensator) => typeof(Compensator),
 			"MuzzleCombo" => typeof(CombMuzzleDevice),
-			"NightVision" => typeof(NightVision),
-			"ThermalVision" => typeof(ThermalVision),
-			"SpecialScope" => typeof(SpecialScope),
-			"CompactCollimator" => typeof(CompactCollimator),
-			"IronSight" => typeof(IronSight),
-			"AssaultScope" => typeof(AssaultScope),
-			"Collimator" => typeof(Collimator),
-			"OpticScope" => typeof(OpticScope),
-			"Bipod" => typeof(Bipod),
+			nameof(NightVision) => typeof(NightVision),
+			nameof(ThermalVision) => typeof(ThermalVision),
+			nameof(SpecialScope) => typeof(SpecialScope),
+			nameof(CompactCollimator) => typeof(CompactCollimator),
+			nameof(IronSight) => typeof(IronSight),
+			nameof(AssaultScope) => typeof(AssaultScope),
+			nameof(Collimator) => typeof(Collimator),
+			nameof(OpticScope) => typeof(OpticScope),
+			nameof(Bipod) => typeof(Bipod),
 			"LightLaser" => typeof(LaserDesignator),
 			"TacticalCombo" => typeof(CombTactDevice),
-			"Flashlight" => typeof(Flashlight),
-			"Foregrip" => typeof(Foregrip),
-			"RailCovers" => typeof(RailCovers),
+			nameof(Flashlight) => typeof(Flashlight),
+			nameof(Foregrip) => typeof(Foregrip),
+			nameof(RailCovers) => typeof(RailCovers),
 			"Gasblock" => typeof(GasBlock),
-			"AuxiliaryMod" => typeof(AuxiliaryMod),
+			nameof(AuxiliaryMod) => typeof(AuxiliaryMod),
 			"Muzzle" => typeof(MuzzleDevice),
-			"Sights" => typeof(Sights),
-			"Stock" => typeof(Stock),
+			nameof(Sights) => typeof(Sights),
+			nameof(Stock) => typeof(Stock),
 			"Charge" => typeof(ChargingHandle),
-			"Mount" => typeof(Mount),
-			"Launcher" => typeof(Launcher),
+			nameof(Mount) => typeof(Mount),
+			nameof(Launcher) => typeof(Launcher),
 			"Shaft" => typeof(MagShaft),
-			"Magazine" => typeof(Magazine),
-			"Handguard" => typeof(Handguard),
-			"PistolGrip" => typeof(PistolGrip),
-			"Barrel" => typeof(Barrel),
-			"Receiver" => typeof(Receiver),
+			nameof(Magazine) => typeof(Magazine),
+			nameof(CylinderMagazine) => typeof(CylinderMagazine),
+			nameof(SpringDrivenCylinder) => typeof(SpringDrivenCylinder),
+			nameof(Handguard) => typeof(Handguard),
+			nameof(PistolGrip) => typeof(PistolGrip),
+			nameof(Barrel) => typeof(Barrel),
+			nameof(Receiver) => typeof(Receiver),
 			"MasterMod" => typeof(EssentialMod),
-			"GearMod" => typeof(GearMod),
-			"FunctionalMod" => typeof(FunctionalMod),
-			"Pockets" => typeof(Pockets),
-			"LootContainer" => typeof(LootContainer),
+			nameof(GearMod) => typeof(GearMod),
+			nameof(FunctionalMod) => typeof(FunctionalMod),
+			nameof(Pockets) => typeof(Pockets),
+			nameof(LootContainer) => typeof(LootContainer),
 			"Vest" => typeof(ChestRig),
-			"Backpack" => typeof(Backpack),
+			nameof(Backpack) => typeof(Backpack),
 			"MobContainer" => typeof(PortableContainer),
-			"AssaultCarbine" => typeof(AssaultCarbine),
-			"MarksmanRifle" => typeof(MarksmanRifle),
-			"Shotgun" => typeof(Shotgun),
-			"GrenadeLauncher" => typeof(GrenadeLauncher),
-			"SniperRifle" => typeof(SniperRifle),
+			nameof(AssaultCarbine) => typeof(AssaultCarbine),
+			nameof(MarksmanRifle) => typeof(MarksmanRifle),
+			nameof(Shotgun) => typeof(Shotgun),
+			nameof(GrenadeLauncher) => typeof(GrenadeLauncher),
+			nameof(SniperRifle) => typeof(SniperRifle),
 			"Pistol" => typeof(Handgun),
-			"AssaultRifle" => typeof(AssaultRifle),
-			"Smg" => typeof(Smg),
-			"SpecialWeapon" => typeof(SpecialWeapon),
+			nameof(AssaultRifle) => typeof(AssaultRifle),
+			nameof(Smg) => typeof(Smg),
+			nameof(SpecialWeapon) => typeof(SpecialWeapon),
 			"MachineGun" => typeof(Machinegun),
-			"Armor" => typeof(Armor),
+			nameof(Revolver) => typeof(Revolver),
+			nameof(Armor) => typeof(Armor),
 			"Visors" => typeof(VisObservDevice),
-			"FaceCover" => typeof(FaceCover),
-			"Headwear" => typeof(Headwear),
-			"ArmBand" => typeof(ArmBand),
-			"Headphones" => typeof(Headphones),
-			"ArmoredEquipment" => typeof(ArmoredEquipment),
-			"SearchableItem" => typeof(SearchableItem),
+			nameof(FaceCover) => typeof(FaceCover),
+			nameof(Headwear) => typeof(Headwear),
+			nameof(ArmBand) => typeof(ArmBand),
+			nameof(Headphones) => typeof(Headphones),
+			nameof(ArmoredEquipment) => typeof(ArmoredEquipment),
+			nameof(SearchableItem) => typeof(SearchableItem),
 			"SimpleContainer" => typeof(CommonContainer),
 			"Mod" => typeof(WeaponMod),
 			"LockableContainer" => typeof(LockingContainer),
-			"StationaryContainer" => typeof(StationaryContainer),
-			"Inventory" => typeof(Inventory),
-			"Stash" => typeof(Stash),
-			"Equipment" => typeof(Equipment),
-			"Weapon" => typeof(Weapon),
-			"Drink" => typeof(Drink),
-			"Food" => typeof(Food),
-			"KeyMechanical" => typeof(KeyMechanical),
-			"Keycard" => typeof(Keycard),
-			"Stimulator" => typeof(Stimulator),
+			nameof(StationaryContainer) => typeof(StationaryContainer),
+			nameof(Inventory) => typeof(Inventory),
+			nameof(Stash) => typeof(Stash),
+			nameof(SortingTable) => typeof(SortingTable),
+			nameof(Equipment) => typeof(Equipment),
+			nameof(Weapon) => typeof(Weapon),
+			nameof(Drink) => typeof(Drink),
+			nameof(Food) => typeof(Food),
+			nameof(KeyMechanical) => typeof(KeyMechanical),
+			nameof(Keycard) => typeof(Keycard),
+			nameof(Stimulator) => typeof(Stimulator),
 			"Medical" => typeof(MedicalItem),
 			"MedKit" => typeof(Medikit),
 			"Drugs" => typeof(Drug),
-			"Compass" => typeof(Compass),
-			"Money" => typeof(Money),
+			nameof(Compass) => typeof(Compass),
+			nameof(PortableRangeFinder) => typeof(PortableRangeFinder),
+			"RepairKits" => typeof(RepairKit),
+			nameof(Money) => typeof(Money),
 			"AmmoBox" => typeof(AmmoContainer),
-			"Ammo" => typeof(Ammo),
-			"StackableItem" => typeof(StackableItem),
+			nameof(Ammo) => typeof(Ammo),
+			nameof(StackableItem) => typeof(StackableItem),
 			"SpecItem" => typeof(SpecialItem),
-			"CompoundItem" => typeof(CompoundItem),
-			"Map" => typeof(Map),
-			"BarterItem" => typeof(BarterItem),
-			"Info" => typeof(Info),
-			"Key" => typeof(Key),
+			nameof(CompoundItem) => typeof(CompoundItem),
+			nameof(Map) => typeof(Map),
+			nameof(BarterItem) => typeof(BarterItem),
+			nameof(Info) => typeof(Info),
+			nameof(Key) => typeof(Key),
 			"FoodDrink" => typeof(FoodAndDrink),
-			"Meds" => typeof(Meds),
+			nameof(Meds) => typeof(Meds),
 			"ThrowWeap" => typeof(ThrowableWeapon),
-			"Knife" => typeof(Knife),
-			_ => typeof(Item)
+			nameof(Knife) => typeof(Knife),
+#if !DEBUG
+			_ => typeof(Item),
+#else
+			_ => throw new ArgumentOutOfRangeException(nameof(name), name, null),
+#endif
 		};
 	}
 
@@ -263,7 +283,7 @@ public class Database
 	/// <param name="ratingFunction">Function to rate a item</param>
 	/// <returns>The item with the highest rating</returns>
 	/// <remarks>Particularly useful in combination with editor distance algorithms to get items by name / short name</remarks>
-	public Item GetItem<T>(Func<Item, T> ratingFunction) where T: IComparable
+	public Item GetItem<T>(Func<Item, T> ratingFunction) where T : IComparable
 	{
 		var rf = ratingFunction;
 		return _items.Values.Aggregate((agg, next) => rf(next).CompareTo(rf(agg)) > 0 ? next : agg).DeepClone();

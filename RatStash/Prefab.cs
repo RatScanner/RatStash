@@ -3,8 +3,8 @@
 public class Prefab
 {
 	[JsonProperty("path")]
-	public string Path { get; set; }
+	public string Path { get; set; } = "";
 
 	[JsonProperty("rcid")]
-	public string RcId { get; set; }
+	public string RcId { get; set; } = "";
 }

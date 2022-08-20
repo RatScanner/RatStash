@@ -6,5 +6,5 @@ public class SearchableItem : CompoundItem
 	public bool BlocksArmorVest { get; set; }
 
 	[JsonProperty("SearchSound")]
-	public string SearchSound { get; set; }
+	public string SearchSound { get; set; } = "";
 }

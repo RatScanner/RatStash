@@ -55,4 +55,28 @@ public class Knife : Item
 
 	[JsonProperty("knifeHitStabRate")]
 	public int KnifeHitStabRate { get; set; }
+
+	[JsonProperty("StimulatorBuffs")]
+	public string StimulatorBuffs { get; set; } = "";
+
+	[JsonProperty("MaxResource")]
+	public int MaxResource { get; set; }
+
+	[JsonProperty("AppliedTrunkRotation")]
+	public Vector3 AppliedTrunkRotation { get; set; }
+
+	[JsonProperty("AppliedHeadRotation")]
+	public Vector3 AppliedHeadRotation { get; set; }
+
+	[JsonProperty("DisplayOnModel")]
+	public bool DisplayOnModel { get; set; }
+
+	[JsonProperty("AdditionalAnimationLayer")]
+	public int AdditionalAnimationLayer { get; set; }
+
+	[JsonProperty("StaminaBurnRate")]
+	public int StaminaBurnRate { get; set; }
+
+	[JsonProperty("ColliderScaleMultiplier")]
+	public Vector3 ColliderScaleMultiplier { get; set; }
 }

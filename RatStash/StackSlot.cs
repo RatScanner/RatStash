@@ -3,14 +3,8 @@
 namespace RatStash;
 
 [JsonConverter(typeof(JsonPathConverter))]
-public class StackSlot : IContainer
+public class StackSlot : RawItem<object>, IContainer
 {
-	[JsonProperty("_name")]
-	public string Name { get; set; }
-
-	[JsonProperty("_id")]
-	public string Id { get; set; }
-
 	[JsonProperty("_max_count")]
 	public int MaxCount { get; set; }
 

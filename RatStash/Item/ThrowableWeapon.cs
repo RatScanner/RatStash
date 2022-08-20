@@ -24,7 +24,7 @@ public class ThrowableWeapon : Item
 	public float ExplosionDelay { get; set; }
 
 	[JsonProperty("FragmentType")]
-	public string FragmentType { get; set; }
+	public string FragmentType { get; set; } = "";
 
 	[JsonProperty("FragmentsCount")]
 	public int FragmentsCount { get; set; }
@@ -39,8 +39,20 @@ public class ThrowableWeapon : Item
 	public int Strength { get; set; }
 
 	[JsonProperty("ThrowType")]
-	public string ThrowType { get; set; }
+	public string ThrowType { get; set; } = "";
 
 	[JsonProperty("throwDamMax")]
 	public int ThrowDamMax { get; set; }
+
+	[JsonProperty("MinFragmentDamage")]
+	public float MinFragmentDamage { get; set; }
+
+	[JsonProperty("MaxFragmentDamage")]
+	public float MaxFragmentDamage { get; set; }
+
+	[JsonProperty("MinTimeToContactExplode")]
+	public float MinTimeToContactExplode { get; set; } = -1f;
+
+	[JsonProperty("ExplosionEffectType")]
+	public string ExplosionEffectType { get; set; } = "";
 }
