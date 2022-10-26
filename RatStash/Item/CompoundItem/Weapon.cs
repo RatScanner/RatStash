@@ -54,7 +54,7 @@ public class Weapon : CompoundItem
 	public float HipAccuracyRestorationSpeed { get; set; }
 
 	[JsonProperty("HipInnaccuracyGain")]
-	public float HipInnaccuracyGain { get; set; }
+	public float HipInaccuracyGain { get; set; }
 
 	[JsonProperty("IronSightRange")]
 	public int IronSightRange { get; set; }
@@ -78,10 +78,10 @@ public class Weapon : CompoundItem
 	public float MaxRepairKitDegradation { get; set; }
 
 	[JsonProperty("MustBoltBeOpennedForExternalReload")]
-	public bool MustBoltBeOpennedForExternalReload { get; set; }
+	public bool MustBoltBeOpenedForExternalReload { get; set; }
 
 	[JsonProperty("MustBoltBeOpennedForInternalReload")]
-	public bool MustBoltBeOpennedForInternalReload { get; set; }
+	public bool MustBoltBeOpenedForInternalReload { get; set; }
 
 	[JsonProperty("OperatingResource")]
 	public int OperatingResource { get; set; }
@@ -99,7 +99,7 @@ public class Weapon : CompoundItem
 	public int RecoilForceUp { get; set; }
 
 	[JsonProperty("RecolDispersion")]
-	public int RecolDispersion { get; set; }
+	public int RecoilDispersion { get; set; }
 
 	[JsonProperty("ReloadMode")]
 	[JsonConverter(typeof(StringEnumConverter))]
@@ -127,7 +127,7 @@ public class Weapon : CompoundItem
 	public float TacticalReloadFixation { get; set; }
 
 	[JsonProperty("TacticalReloadStiffnes")]
-	public Vector3 TacticalReloadStiffnes { get; set; }
+	public Vector3 TacticalReloadStiffness { get; set; }
 
 	[JsonProperty("Velocity")]
 	public float Velocity { get; set; }
