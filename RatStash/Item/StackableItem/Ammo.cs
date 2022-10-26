@@ -42,7 +42,7 @@ public class Ammo : StackableItem
 	public string FragmentType { get; set; } = "";
 
 	[JsonProperty("FragmentationChance")]
-	public int FragmentationChance { get; set; }
+	public float FragmentationChance { get; set; }
 
 	[JsonProperty("FragmentsCount")]
 	public int FragmentsCount { get; set; }
@@ -87,19 +87,19 @@ public class Ammo : StackableItem
 	public int MinFragmentsCount { get; set; }
 
 	[JsonProperty("MisfireChance")]
-	public int MisfireChance { get; set; }
+	public float MisfireChance { get; set; }
 
 	[JsonProperty("PenetrationChance")]
-	public int PenetrationChance { get; set; }
+	public float PenetrationChance { get; set; }
 
 	[JsonProperty("PenetrationPowerDiviation")]
-	public int PenetrationPowerDiviation { get; set; }
+	public float PenetrationPowerDiviation { get; set; }
 
 	[JsonProperty("ProjectileCount")]
 	public int ProjectileCount { get; set; }
 
 	[JsonProperty("RicochetChance")]
-	public int RicochetChance { get; set; }
+	public float RicochetChance { get; set; }
 
 	[JsonProperty("ShowBullet")]
 	public bool ShowBullet { get; set; }
@@ -108,7 +108,7 @@ public class Ammo : StackableItem
 	public bool ShowHitEffectOnExplode { get; set; }
 
 	[JsonProperty("SpeedRetardation")]
-	public int SpeedRetardation { get; set; }
+	public float SpeedRetardation { get; set; }
 
 	[JsonProperty("StaminaBurnPerDamage")]
 	public float StaminaBurnPerDamage { get; set; }
@@ -149,7 +149,7 @@ public class Ammo : StackableItem
 	public int CasingEjectPower { get; set; }
 
 	[JsonProperty("casingMass")]
-	public int CasingMass { get; set; }
+	public float CasingMass { get; set; }
 
 	[JsonProperty("casingName")]
 	public string CasingName { get; set; } = "";
