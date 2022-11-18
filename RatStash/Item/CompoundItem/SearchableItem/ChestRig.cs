@@ -10,7 +10,7 @@ public class ChestRig : SearchableItem
 	public ArmorMaterial ArmorMaterial { get; set; }
 
 	[JsonProperty("BluntThroughput")]
-	public int BluntThroughput { get; set; }
+	public float BluntThroughput { get; set; }
 
 	[JsonProperty("Durability")]
 	public int Durability { get; set; }
