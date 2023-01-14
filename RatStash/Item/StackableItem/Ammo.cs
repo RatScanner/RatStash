@@ -54,7 +54,7 @@ public class Ammo : StackableItem
 	public bool HasGrenaderComponent { get; set; }
 
 	[JsonProperty("HeavyBleedingDelta")]
-	public int HeavyBleedingDelta { get; set; }
+	public float HeavyBleedingDelta { get; set; }
 
 	[JsonProperty("InitialSpeed")]
 	public int InitialSpeed { get; set; }
@@ -72,7 +72,7 @@ public class Ammo : StackableItem
 	public int LightAndSoundShotSelfContusionTime { get; set; }
 
 	[JsonProperty("LightBleedingDelta")]
-	public int LightBleedingDelta { get; set; }
+	public float LightBleedingDelta { get; set; }
 
 	[JsonProperty("MaxExplosionDistance")]
 	public int MaxExplosionDistance { get; set; }

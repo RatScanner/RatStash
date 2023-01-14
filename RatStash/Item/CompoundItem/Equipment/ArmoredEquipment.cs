@@ -13,10 +13,10 @@ public class ArmoredEquipment : Equipment
 	public ArmorType ArmorType { get; set; }
 
 	[JsonProperty("BlindnessProtection")]
-	public int BlindnessProtection { get; set; }
+	public float BlindnessProtection { get; set; }
 
 	[JsonProperty("BluntThroughput")]
-	public int BluntThroughput { get; set; }
+	public float BluntThroughput { get; set; }
 
 	[JsonProperty("DeafStrength")]
 	public DeafStrength DeafStrength { get; set; }

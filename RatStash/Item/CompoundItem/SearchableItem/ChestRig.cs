@@ -14,7 +14,7 @@ public class ChestRig : SearchableItem
 	public ArmorType ArmorType { get; set; }
 
 	[JsonProperty("BluntThroughput")]
-	public int BluntThroughput { get; set; }
+	public float BluntThroughput { get; set; }
 
 	[JsonProperty("Durability")]
 	public int Durability { get; set; }
