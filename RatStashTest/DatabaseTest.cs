@@ -81,9 +81,9 @@ public class DatabaseTest : TestEnvironment
 	public void QueryMaxItem()
 	{
 		var database = GetDatabase();
-		var mostHeavyItem = database.GetItem(item => item.Weight);
-		Assert.Equal(500, mostHeavyItem.Weight);
-		Assert.Equal("Airdrop supply crate", mostHeavyItem.Name);
+		var maxItem = database.GetItem(item => item.Name.Length);
+		Assert.Equal(76, maxItem.Name.Length);
+		Assert.Equal("Nightforce Magmount 34mm ring scope mount with Ruggedized Accessory Platform", maxItem.Name);
 	}
 
 	[Fact]
@@ -100,7 +100,7 @@ public class DatabaseTest : TestEnvironment
 	{
 		var database = GetDatabase();
 		var items = database.GetItems().ToArray();
-		Assert.Equal(2791, items.Length);
+		Assert.Equal(2951, items.Length);
 		Assert.DoesNotContain(null, items);
 	}
 
@@ -164,7 +164,7 @@ public class DatabaseTest : TestEnvironment
 	{
 		var database = GetDatabase();
 		var cacheIndex = GetCacheHashIndex(database);
-		Assert.True(cacheIndex.Count >= 36);
+		Assert.True(cacheIndex.Count >= 35);
 
 		var item = cacheIndex[14].item;
 

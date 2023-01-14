@@ -76,8 +76,17 @@ public class Item
 	[JsonProperty("IsUngivable")]
 	public bool IsUngivable { get; set; }
 
+	[JsonProperty("IsUnremovable")]
+	public bool IsUnremovable { get; set; }
+
+	[JsonProperty("InsuranceDisabled")]
+	public bool InsuranceDisabled { get; set; }
+
 	[JsonProperty("IsLockedafterEquip")]
 	public bool IsLockedafterEquip { get; set; }
+
+	[JsonProperty("IsSpecialSlotOnly")]
+	public bool IsSpecialSlotOnly { get; set; }
 
 	[JsonProperty("QuestItem")]
 	public bool QuestItem { get; set; }
@@ -160,6 +169,9 @@ public class Item
 
 	[JsonProperty("DiscardLimit")]
 	public int DiscardLimit { get; set; } = -1;
+
+	[JsonProperty("QuestStashMaxCount")]
+	public int QuestStashMaxCount { get; set; }
 
 	/// <summary>
 	/// Recursively compute the slot size of the item

@@ -9,6 +9,10 @@ public class ChestRig : SearchableItem
 	[JsonConverter(typeof(StringEnumConverter))]
 	public ArmorMaterial ArmorMaterial { get; set; }
 
+	[JsonProperty("ArmorType")]
+	[JsonConverter(typeof(StringEnumConverter))]
+	public ArmorType ArmorType { get; set; }
+
 	[JsonProperty("BluntThroughput")]
 	public int BluntThroughput { get; set; }
 

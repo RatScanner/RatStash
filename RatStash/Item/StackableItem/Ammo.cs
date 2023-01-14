@@ -107,6 +107,9 @@ public class Ammo : StackableItem
 	[JsonProperty("ShowHitEffectOnExplode")]
 	public bool ShowHitEffectOnExplode { get; set; }
 
+	[JsonProperty("RemoveShellAfterFire")]
+	public bool RemoveShellAfterFire { get; set; }
+
 	[JsonProperty("SpeedRetardation")]
 	public float SpeedRetardation { get; set; }
 

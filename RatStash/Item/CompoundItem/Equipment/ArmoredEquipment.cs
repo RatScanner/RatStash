@@ -8,6 +8,10 @@ public class ArmoredEquipment : Equipment
 	[JsonProperty("ArmorMaterial")]
 	public ArmorMaterial ArmorMaterial { get; set; }
 
+	[JsonProperty("ArmorType")]
+	[JsonConverter(typeof(StringEnumConverter))]
+	public ArmorType ArmorType { get; set; }
+
 	[JsonProperty("BlindnessProtection")]
 	public int BlindnessProtection { get; set; }
 

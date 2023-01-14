@@ -117,18 +117,18 @@ public class Database
 	/// <param name="json">Locale data as json string</param>
 	private void LoadLocale(string json)
 	{
-		var jObj = JObject.Parse(json);
-		var templates = jObj["templates"].Children();
+		var translations = JObject.Parse(json);
 
-		foreach (var template in templates)
+		foreach (var itemId in _items.Keys)
 		{
-			var itemId = ((JProperty)template).Name;
+			var name = translations[itemId + " Name"];
+			if (name != null) _items[itemId].Name = name.Value<string>();
 
-			if (!_items.ContainsKey(itemId)) continue;
+			var shortName = translations[itemId + " ShortName"];
+			if (shortName != null) _items[itemId].ShortName = shortName.Value<string>();
 
-			_items[itemId].Name = (string)template.First["Name"];
-			_items[itemId].ShortName = (string)template.First["ShortName"];
-			_items[itemId].Description = (string)template.First["Description"];
+			var description = translations[itemId + " Description"];
+			if (description != null) _items[itemId].Description = description.Value<string>();
 		}
 	}
 
@@ -213,6 +213,7 @@ public class Database
 			"Mod" => typeof(WeaponMod),
 			"LockableContainer" => typeof(LockingContainer),
 			nameof(StationaryContainer) => typeof(StationaryContainer),
+			nameof(RandomLootContainer) => typeof(RandomLootContainer),
 			nameof(Inventory) => typeof(Inventory),
 			nameof(Stash) => typeof(Stash),
 			nameof(SortingTable) => typeof(SortingTable),
@@ -227,6 +228,7 @@ public class Database
 			"MedKit" => typeof(Medikit),
 			"Drugs" => typeof(Drug),
 			nameof(Compass) => typeof(Compass),
+			nameof(RadioTransmitter) => typeof(RadioTransmitter),
 			nameof(PortableRangeFinder) => typeof(PortableRangeFinder),
 			"RepairKits" => typeof(RepairKit),
 			nameof(Money) => typeof(Money),

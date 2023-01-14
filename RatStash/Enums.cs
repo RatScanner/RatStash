@@ -39,6 +39,13 @@ public enum ArmorMaterial
 	UHMWPE
 }
 
+public enum ArmorType
+{
+	None,
+	Light,
+	Heavy,
+}
+
 public enum ArmorZone
 {
 	Chest,
@@ -196,6 +203,13 @@ public enum FireMode : byte
 	Burst = 3,
 	Doubleaction = 4,
 	Semiauto = 5
+}
+
+public enum RepairStrategy
+{
+	MeleeWeapon,
+	Firearms,
+	Armor,
 }
 
 public enum UseType

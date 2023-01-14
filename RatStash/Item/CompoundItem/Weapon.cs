@@ -216,6 +216,9 @@ public class Weapon : CompoundItem
 	[JsonProperty("AllowOverheat")]
 	public bool AllowOverheat { get; set; }
 
+	[JsonProperty("NoFiremodeOnBoltcatch")]
+	public bool NoFiremodeOnBoltcatch { get; set; }
+
 	[JsonProperty("HeatFactorByShot")]
 	public float HeatFactorByShot { get; set; } = 1f;
 
