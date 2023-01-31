@@ -51,6 +51,8 @@ public static class Extensions
 	/// <remarks>АВЕЅZІКМНОРСТХ -> ABESZIKMHOPCTX</remarks>
 	public static string CyrillicToLatin(this string str)
 	{
+		if (str == null) return null;
+
 		const string cyrillicChars = "АВЕЅZІКМНОРСТХ"; //ШѴУ
 		const string latinChars = "ABESZIKMHOPCTX"; //WVY
 

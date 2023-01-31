@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Force.DeepCloner;
 using Newtonsoft.Json.Linq;
 
@@ -33,8 +32,11 @@ public class Database
 		if (cleanStrings) items = items.CyrillicToLatin();
 
 		var db = new Database();
-		db.Load(items);
-		if (locale != null) db.LoadLocale(locale);
+
+		db.Load(JObject.Parse(items));
+		if (locale != null) db.LoadLocale(JObject.Parse(locale));
+
+		if (cleanStrings) db.CleanStrings();
 		return db;
 	}
 
@@ -42,28 +44,39 @@ public class Database
 	/// Create a new database object
 	/// </summary>
 	/// <param name="itemPath">Path to the file, containing the item data</param>
-	/// <param name="cleanStrings">Replace cyrillic characters with similar looking latin characters</param>
 	/// <param name="localePath">Path to the file, containing the localization data</param>
 	public static Database FromFile(string itemPath, bool cleanStrings, string localePath = null)
 	{
+		var serializer = new JsonSerializer();
+
 		using var itemFileStream = File.Open(itemPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
 		using var itemTextReader = new StreamReader(itemFileStream);
-		var items = itemTextReader.ReadToEnd();
+		using var itemJsonReader = new JsonTextReader(itemTextReader);
 
-		if (localePath == null) return FromString(items, cleanStrings);
+		var itemJObject = serializer.Deserialize<JObject>(itemJsonReader);
 
-		using var localeFileStream = File.Open(localePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-		using var localeTextReader = new StreamReader(localeFileStream);
-		var locale = localeTextReader.ReadToEnd();
+		var db = new Database();
+		db.Load(itemJObject);
 
-		return FromString(items, cleanStrings, locale);
+		if (localePath != null)
+		{
+			using var localeFileStream = File.Open(localePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+			using var localeTextReader = new StreamReader(localeFileStream);
+			using var localeJsonReader = new JsonTextReader(localeTextReader);
+
+			var localeJObject = serializer.Deserialize<JObject>(localeJsonReader);
+			db.LoadLocale(localeJObject);
+		}
+
+		if (cleanStrings) db.CleanStrings();
+		return db;
 	}
 
 	/// <summary>
 	/// Load the item data from a file
 	/// </summary>
-	/// <param name="json">Item data as json string</param>
-	private void Load(string json)
+	/// <param name="itemData">Item data as <see cref="JObject"/></param>
+	private void Load(JObject itemData)
 	{
 		var settings = new JsonSerializerSettings
 		{
@@ -71,35 +84,40 @@ public class Database
 			MissingMemberHandling = MissingMemberHandling.Error,
 #endif
 		};
-		var serializer = JsonSerializer.Create(settings);
 
-		var jObj = JObject.Parse(json);
-		var items = jObj.Children();
+		var serializer = JsonSerializer.Create(settings);
+		var items = itemData.Children();
 
 		// First pass to determine node hierarchy
-		foreach (var item in items)
+		Parallel.ForEach(items, item =>
 		{
 			var itemInfo = item.First;
 			if ((string)itemInfo["_type"] == "Node")
 			{
-				_nodes.Add((string)itemInfo["_id"], NameToItemType((string)itemInfo["_name"]));
+				lock (_nodes)
+				{
+					_nodes.Add((string)itemInfo["_id"], NameToItemType((string)itemInfo["_name"]));
+				}
 			}
-		}
+		});
 
 		// Second pass to parse actual items
-		foreach (var item in items)
+		Parallel.ForEach(items, item =>
 		{
 			var itemInfo = item.First;
-			if ((string)itemInfo["_type"] != "Item") continue;
+			if ((string)itemInfo["_type"] != "Item") return;
 
 			var parent = ResolveParentType((string)itemInfo["_parent"]);
 			var id = (string)itemInfo["_id"];
 			try
 			{
 				var parsedItem = (Item)itemInfo["_props"].ToObject(parent, serializer);
-				if (parsedItem == null) continue;
+				if (parsedItem == null) return;
 				parsedItem.Id = id;
-				_items.Add(id, parsedItem);
+				lock (_items)
+				{
+					_items.Add(id, parsedItem);
+				}
 			}
 			catch
 			{
@@ -108,27 +126,25 @@ public class Database
 				throw;
 #endif
 			}
-		}
+		});
 	}
 
 	/// <summary>
 	/// Load the locale data from a file and insert it into the current loaded database
 	/// </summary>
-	/// <param name="json">Locale data as json string</param>
-	private void LoadLocale(string json)
+	/// <param name="translations">Locale data as <see cref="JObject"/></param>
+	private void LoadLocale(JObject translations)
 	{
-		var translations = JObject.Parse(json);
-
 		foreach (var itemId in _items.Keys)
 		{
 			var name = translations[itemId + " Name"];
-			if (name != null) _items[itemId].Name = name.Value<string>();
+			if (name != null && _items[itemId].Name != null) _items[itemId].Name = name.Value<string>();
 
 			var shortName = translations[itemId + " ShortName"];
-			if (shortName != null) _items[itemId].ShortName = shortName.Value<string>();
+			if (shortName != null && _items[itemId].ShortName != null) _items[itemId].ShortName = shortName.Value<string>();
 
 			var description = translations[itemId + " Description"];
-			if (description != null) _items[itemId].Description = description.Value<string>();
+			if (description != null && _items[itemId].Description != null) _items[itemId].Description = description.Value<string>();
 		}
 	}
 
@@ -256,6 +272,16 @@ public class Database
 	internal Type ResolveParentType(string id)
 	{
 		return _nodes[id];
+	}
+
+	public void CleanStrings()
+	{
+		foreach (var itemId in _items.Keys)
+		{
+			if (_items[itemId].Name != null) _items[itemId].Name = _items[itemId].Name.CyrillicToLatin();
+			if (_items[itemId].ShortName != null) _items[itemId].ShortName = _items[itemId].ShortName.CyrillicToLatin();
+			if (_items[itemId].Description != null) _items[itemId].Description = _items[itemId].Description.CyrillicToLatin();
+		}
 	}
 
 	/// <summary>
