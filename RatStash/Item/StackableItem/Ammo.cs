@@ -14,7 +14,7 @@ public class Ammo : StackableItem
 	public ArmorDistanceDistanceDamage ArmorDistanceDistanceDamage { get; set; }
 
 	[JsonProperty("BallisticCoeficient")]
-	public int BallisticCoeficient { get; set; }
+	public float BallisticCoeficient { get; set; }
 
 	[JsonProperty("Blindness")]
 	public ArmorDistanceDistanceDamage Blindness { get; set; }
