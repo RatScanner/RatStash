@@ -22,6 +22,17 @@ public class Database
 	private Database() { }
 
 	/// <summary>
+	/// Creates a new database object from a collection of items
+	/// </summary>
+	/// <param name="items">The items in the new database</param>
+	public static Database FromItems(IEnumerable<Item> items)
+	{
+		var db = new Database();
+		db._items = items.ToDictionary(i => i.Id, i => i);
+		return db;
+	}
+
+	/// <summary>
 	/// Create a new database object
 	/// </summary>
 	/// <param name="items">Item data as json string</param>
