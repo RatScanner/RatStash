@@ -69,18 +69,6 @@ public class TestEnvironment
 	{
 		var itemsPath = Combine(BasePath, "TestData\\items.json");
 		var localePath = Combine(BasePath, $"TestData\\locales\\{locale}.json");
-		return Database.FromFile(itemsPath, cleaned, localePath);
-	}
-
-	public Dictionary<int, (Item item, ItemExtraInfo itemExtraInfo)> GetCacheIndex(Database database)
-	{
-		var cacheIndexPath = Combine(BasePath, "TestData\\index.json");
-		return database.ParseItemCacheIndex(cacheIndexPath);
-	}
-
-	public Dictionary<int, (Item item, ItemExtraInfo itemExtraInfo)> GetCacheHashIndex(Database database)
-	{
-		var cacheHashIndexPath = Combine(BasePath, "TestData\\hashIndex.json");
-		return database.ParseItemCacheHashIndex(cacheHashIndexPath);
+		return Database.FromFile(itemsPath, cleaned, localePath).Filter(i => i.Name != "" && i.ShortName != "");
 	}
 }

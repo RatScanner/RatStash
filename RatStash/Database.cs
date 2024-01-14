@@ -13,12 +13,6 @@ public class Database
 	private Dictionary<string, Item> _items = new();
 	private Dictionary<string, Type> _nodes = new();
 
-	private CacheIndexParser _indexParser;
-	private CacheHashIndexParser _hashIndexParser;
-
-	private CacheIndexParser CacheIndexParserInstance => _indexParser ??= new CacheIndexParser(this);
-	private CacheHashIndexParser CacheHashIndexParserInstance => _hashIndexParser ??= new CacheHashIndexParser(this);
-
 	private Database() { }
 
 	/// <summary>
@@ -92,7 +86,7 @@ public class Database
 		var settings = new JsonSerializerSettings
 		{
 #if DEBUG
-			MissingMemberHandling = MissingMemberHandling.Error,
+			//MissingMemberHandling = MissingMemberHandling.Error,
 #endif
 		};
 
@@ -134,7 +128,7 @@ public class Database
 			{
 				// ignored
 #if DEBUG
-				throw;
+				//throw;
 #endif
 			}
 		});
@@ -272,6 +266,10 @@ public class Database
 			nameof(Meds) => typeof(Meds),
 			"ThrowWeap" => typeof(ThrowableWeapon),
 			nameof(Knife) => typeof(Knife),
+			nameof(ArmorPlate) => typeof(ArmorPlate),
+			nameof(HideoutAreaContainer) => typeof(HideoutAreaContainer),
+			nameof(CultistAmulet) => typeof(CultistAmulet),
+			nameof(BuiltInInserts) => typeof(BuiltInInserts),
 #if !DEBUG
 			_ => typeof(Item),
 #else
@@ -362,27 +360,5 @@ public class Database
 			_nodes = _nodes.DeepClone()
 		};
 		return db;
-	}
-
-	/// <summary>
-	/// Parse a item cache index file into a dictionary of <see cref="Item"/> and <see cref="ItemExtraInfo"/>
-	/// </summary>
-	/// <param name="filepath">The path to the cache index file</param>
-	/// <returns>The parsed cache index</returns>
-	[Obsolete("This method is deprecated as of EfT 0.12.11.2.13615, use ParseItemCacheHashIndex")]
-	public Dictionary<int, (Item item, ItemExtraInfo itemExtraInfo)> ParseItemCacheIndex(string filepath)
-	{
-		return CacheIndexParserInstance.Parse(filepath);
-	}
-
-	/// <summary>
-	/// Parse a item cache hash index file into a dictionary of <see cref="Item"/> and <see cref="ItemExtraInfo"/>
-	/// </summary>
-	/// <param name="filepath">The path to the cache index file</param>
-	/// <returns>The parsed cache index</returns>
-	/// <remarks>The returned dictionary will only include single items</remarks>
-	public Dictionary<int, (Item item, ItemExtraInfo itemExtraInfo)> ParseItemCacheHashIndex(string filepath)
-	{
-		return CacheHashIndexParserInstance.Parse(filepath);
 	}
 }

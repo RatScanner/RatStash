@@ -82,8 +82,8 @@ public class DatabaseTest : TestEnvironment
 	{
 		var database = GetDatabase();
 		var maxItem = database.GetItem(item => item.Name.Length);
-		Assert.Equal(76, maxItem.Name.Length);
-		Assert.Equal("Nightforce Magmount 34mm ring scope mount with Ruggedized Accessory Platform", maxItem.Name);
+		Assert.Equal(78, maxItem.Name.Length);
+		Assert.Equal("AR-15 Strike Industries Advanced Receiver Extension buffer tube (Anodized Red)", maxItem.Name);
 	}
 
 	[Fact]
@@ -100,7 +100,7 @@ public class DatabaseTest : TestEnvironment
 	{
 		var database = GetDatabase();
 		var items = database.GetItems().ToArray();
-		Assert.Equal(2951, items.Length);
+		Assert.Equal(3397, items.Length);
 		Assert.DoesNotContain(null, items);
 	}
 
@@ -137,38 +137,5 @@ public class DatabaseTest : TestEnvironment
 		Assert.Null(filteredDatabase.GetItem("5939a00786f7742fe8132936"));
 		Assert.NotNull(database.GetItem("56742c2e4bdc2d95058b456d"));
 		Assert.NotNull(filteredDatabase.GetItem("56742c2e4bdc2d95058b456d"));
-	}
-
-	[Fact]
-	public void ParseItemCacheIndex()
-	{
-		var database = GetDatabase();
-		var cacheIndex = GetCacheIndex(database);
-		Assert.Equal(48, cacheIndex.Count);
-
-		var item = cacheIndex[12].item;
-		var itemExtraInfo = cacheIndex[12].itemExtraInfo;
-
-		Assert.Equal("6B47", item.ShortName);
-		Assert.True(item is CompoundItem);
-		Assert.True(itemExtraInfo.ItemIsToggled);
-
-		var slots = (item as CompoundItem).Slots;
-		Assert.Equal(2, slots.Count);
-		Assert.Equal("mod_nvg", slots[0].Name);
-		Assert.Equal("GPNVG-18", slots[0].ContainedItem.ShortName);
-	}
-
-	[Fact]
-	public void ParseItemCacheHashIndex()
-	{
-		var database = GetDatabase();
-		var cacheIndex = GetCacheHashIndex(database);
-		Assert.True(cacheIndex.Count >= 35);
-
-		var item = cacheIndex[14].item;
-
-		Assert.Equal("PVS-14", item.ShortName);
-		Assert.True(item is CompoundItem);
 	}
 }
