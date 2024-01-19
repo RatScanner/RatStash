@@ -4,6 +4,18 @@ namespace RatStash;
 
 public class ItemFilter
 {
+	[JsonProperty("locked")]
+	public bool Locked { get; set; } = new();
+
+	[JsonProperty("Plate")]
+	public string PlateId { get; set; } = "";
+
+	[JsonProperty("armorColliders")]
+	public List<ArmorCollider> ArmorColliders { get; set; } = new();
+
+	[JsonProperty("armorPlateColliders")]
+	public List<ArmorPlateCollider> ArmorPlateColliders { get; set; } = new();
+
 	[JsonProperty("Filter")]
 	public List<string> Whitelist { get; set; } = new();
 
