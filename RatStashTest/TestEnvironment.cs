@@ -69,6 +69,6 @@ public class TestEnvironment
 	{
 		var itemsPath = Combine(BasePath, "TestData\\items.json");
 		var localePath = Combine(BasePath, $"TestData\\locales\\{locale}.json");
-		return Database.FromFile(itemsPath, cleaned, localePath).Filter(i => i.Name != "" && i.ShortName != "");
+		return Database.FromFile(itemsPath, cleaned, localePath);
 	}
 }

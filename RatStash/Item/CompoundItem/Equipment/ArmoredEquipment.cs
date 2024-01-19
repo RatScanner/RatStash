@@ -62,6 +62,25 @@ public class ArmoredEquipment : Equipment
 
 	[JsonProperty("weaponErgonomicPenalty")]
 	public int WeaponErgonomicPenalty { get; set; }
+
+	public List<ArmorCollider> GetArmorColliders()
+	{
+		List<ArmorCollider> result = new List<ArmorCollider>();
+		foreach(var slot in Slots)
+		{
+			result.AddRange(slot.Filters[0].ArmorColliders);
+		}
+		return result;
+	}
+	public List<ArmorPlateCollider> GetArmorPlateColliders()
+	{
+		List<ArmorPlateCollider> result = new List<ArmorPlateCollider>();
+		foreach(var slot in Slots)
+		{
+			result.AddRange(slot.Filters[0].ArmorPlateColliders);
+		}
+		return result;
+	}
 }
 
 public class RicochetParams

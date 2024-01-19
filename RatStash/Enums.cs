@@ -46,6 +46,54 @@ public enum ArmorType
 	Heavy,
 }
 
+public enum ArmorCollider
+{
+    BackHead,
+    Ears,
+    Eyes,
+    HeadCommon,
+    Jaw,
+    LeftCalf,
+    LeftForearm,
+    LeftSideChestDown,
+    LeftSideChestUp,
+    LeftThigh,
+    LeftUpperArm,
+    NeckBack,
+    NeckFront,
+    ParietalHead,
+    Pelvis,
+    PelvisBack,
+    RibcageLow,
+    RibcageUp,
+    RightCalf,
+    RightForearm,
+    RightSideChestDown,
+    RightSideChestUp,
+    RightThigh,
+    RightUpperArm,
+    SpineDown,
+    SpineTop
+}
+
+public enum ArmorPlateCollider
+{
+	// NATO
+    Plate_Granit_SAPI_chest,
+    Plate_Granit_SAPI_back,
+    Plate_Granit_SSAPI_side_left_high,
+    Plate_Granit_SSAPI_side_left_low,
+    Plate_Granit_SSAPI_side_right_high,
+    Plate_Granit_SSAPI_side_right_low,
+	// RU
+    Plate_Korund_chest,
+	Plate_6B13_back,
+    Plate_Korund_side_left_high,
+    Plate_Korund_side_left_low,
+    Plate_Korund_side_right_high,
+    Plate_Korund_side_right_low
+}
+
 public enum ArmorZone
 {
 	Chest,
