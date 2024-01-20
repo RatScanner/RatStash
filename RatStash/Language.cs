@@ -53,6 +53,7 @@ public static class LanguageConverter
 			Language.Slovak => "sk",
 			Language.Turkish => "tu",
 			Language.Romanian => "ro",
+			_ => "en"
 		};
 	}
 
@@ -82,6 +83,7 @@ public static class LanguageConverter
 			Language.Slovak => "slk",
 			Language.Turkish => "tur",
 			Language.Romanian => "rou",
+			_ => "eng"
 		};
 	}
 }
