@@ -25,23 +25,23 @@ public class ArmorTest : TestEnvironment
 		Assert.True(BuiltIns.Count > 0);
 	}
 
-	//[Fact]
-	//public void TestAssembleArmor()
-	//{
-	//	var database = GetDatabase();
-	//	Armor item = (Armor) database.GetItem("545cdb794bdc2d3a198b456a");
-	//	foreach(var slot in item.Slots)
-	//	{
-	//		var plate = database.GetItem(slot.Filters[0].PlateId);
-	//		slot.ContainedItem = plate;
-	//	}
-	//	Assert.NotNull(item);
+	[Fact]
+	public void TestAssembleArmor()
+	{
+		var database = GetDatabase();
+		Armor item = (Armor)database.GetItem("545cdb794bdc2d3a198b456a");
+		foreach (var slot in item.Slots)
+		{
+			var plate = database.GetItem(slot.Filters[0].PlateId);
+			slot.ContainedItem = plate;
+		}
+		Assert.NotNull(item);
 
-	//	foreach(var slot in item.Slots)
-	//	{
-	//		Assert.NotNull(slot.ContainedItem);
-	//	}
-	//}
+		foreach (var slot in item.Slots)
+		{
+			Assert.NotNull(slot.ContainedItem);
+		}
+	}
 
 	[Fact]
 	public void TestGetArmorCollidersArmor()

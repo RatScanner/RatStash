@@ -58,7 +58,7 @@ public class ArmoredEquipment : Equipment
 	public List<ArmorCollider> ArmorColliders { get; set; } = new();
 
 	[JsonProperty("armorPlateColliders", ItemConverterType = typeof(StringEnumConverter))]
-	public List<ArmorCollider> ArmorPlateColliders { get; set; } = new();
+	public List<ArmorPlateCollider> ArmorPlateColliders { get; set; } = new();
 
 	[JsonProperty("mousePenalty")]
 	public int MousePenalty { get; set; }

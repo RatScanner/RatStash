@@ -128,7 +128,7 @@ public class Database
 			{
 				// ignored
 #if DEBUG
-				//throw;
+				throw;
 #endif
 			}
 		});
