@@ -42,6 +42,7 @@ public class ArmorTest : TestEnvironment
 	//		Assert.NotNull(slot.ContainedItem);
 	//	}
 	//}
+
 	[Fact]
 	public void TestGetArmorCollidersArmor()
 	{
