@@ -29,20 +29,20 @@ public class ArmorTest : TestEnvironment
 	public void TestAssembleArmor()
 	{
 		var database = GetDatabase();
-		Armor item = (Armor) database.GetItem("545cdb794bdc2d3a198b456a");
-		foreach(var slot in item.Slots)
+		Armor item = (Armor)database.GetItem("545cdb794bdc2d3a198b456a");
+		foreach (var slot in item.Slots)
 		{
 			var plate = database.GetItem(slot.Filters[0].PlateId);
-			Assert.NotNull(item);
 			slot.ContainedItem = plate;
 		}
 		Assert.NotNull(item);
 
-		foreach(var slot in item.Slots)
+		foreach (var slot in item.Slots)
 		{
 			Assert.NotNull(slot.ContainedItem);
 		}
 	}
+
 	[Fact]
 	public void TestGetArmorCollidersArmor()
 	{

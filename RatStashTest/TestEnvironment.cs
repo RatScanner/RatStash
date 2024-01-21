@@ -68,7 +68,7 @@ public class TestEnvironment
 	public Database GetDatabase(string locale = "en", bool cleaned = false)
 	{
 		var itemsPath = Combine(BasePath, "TestData\\items.json");
-		var localePath = Combine(BasePath, $"TestData\\locales\\{locale}.json");
-		return Database.FromFile(itemsPath, cleaned, localePath);
+		if (locale != null) locale = Combine(BasePath, $"TestData\\locales\\{locale}.json");
+		return Database.FromFile(itemsPath, cleaned, locale);
 	}
 }

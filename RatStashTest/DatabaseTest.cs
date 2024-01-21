@@ -89,7 +89,7 @@ public class DatabaseTest : TestEnvironment
 	[Fact]
 	public void QueryByName()
 	{
-		var database = GetDatabase();
+		var database = GetDatabase().Filter(i => i.Name != "" && i.ShortName != "");
 		var query = "A8h 12 p0Iymer";
 		var result = database.GetItem(item => NormedLevenshteinDistance(item.Name, query));
 		Assert.StartsWith("ASh-12 polymer handguard", result.Name);
@@ -100,29 +100,26 @@ public class DatabaseTest : TestEnvironment
 	{
 		var database = GetDatabase();
 		var items = database.GetItems().ToArray();
-		Assert.Equal(3397, items.Length);
+		Assert.Equal(3731, items.Length);
 		Assert.DoesNotContain(null, items);
 	}
 
 	[Fact]
 	public void CheckCleanDatabase()
 	{
-		var database = GetDatabase("en", true);
-		var item = database.GetItem("59e6658b86f77411d949b250");
-		Assert.Equal(".366 TKM Geksa", item.Name);  // "TKM" are latin chars
-		Assert.Equal("Geksa", item.ShortName);
-		Assert.StartsWith("A .366 TKM (9.55x39mm) Geksa cartridge with ", item.Description); // "TKM" are latin chars
+		var database = GetDatabase(null, true);
+		var item = database.GetItem("5bf3e0490db83400196199af");
+		Assert.Equal("Aвтомат Kалашникова AK-74H 5.45x39", item.Name);  // "AK" are latin chars
+		Assert.Equal("AK-74N 5.45x39", item.ShortName);                 // "AK" are latin chars
 	}
 
 	[Fact]
 	public void CheckUncleanDatabase()
 	{
-		return; // TODO
-		var database = GetDatabase();
-		var item = database.GetItem("59e6658b86f77411d949b250");
-		Assert.Equal(".366 ТКМ Geksa", item.Name);  // "ТКМ" are cyrillic chars
-		Assert.Equal("Geksa", item.ShortName);
-		Assert.Equal(".366 ТКМ Geksa cartridge", item.Description); // "ТКМ" are cyrillic chars
+		var database = GetDatabase(null, false);
+		var item = database.GetItem("5bf3e0490db83400196199af");
+		Assert.Equal("Автомат Калашникова АК-74Н 5.45x39", item.Name);  // "АК" are cyrillic chars
+		Assert.Equal("АК-74N 5.45x39", item.ShortName);                 // "АК" are cyrillic chars
 	}
 
 	[Fact]
