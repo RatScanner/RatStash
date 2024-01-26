@@ -92,11 +92,11 @@ public class ArmoredEquipment : Equipment
 public class RicochetParams
 {
 	[JsonProperty("x")]
-	public int X { get; set; }
+	public float X { get; set; }
 
 	[JsonProperty("y")]
-	public int Y { get; set; }
+	public float Y { get; set; }
 
 	[JsonProperty("z")]
-	public int Z { get; set; }
+	public float Z { get; set; }
 }
